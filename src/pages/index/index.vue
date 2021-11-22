@@ -3,18 +3,30 @@ view.content
   image.logo(src="../../static/logo.png")
     view
       text.title {{title}} 3232
+      uv-button(type="primary" @click="()=>showLog('111')") 测试
+      uv-button(type="primary" shape="circle" text="按钮形状" @click="()=>showLog('444')") 123
+
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { uvButton } from '@/shared/uview'
+
 export default Vue.extend({
+    components: {
+        uvButton
+    },
     data() {
         return {
             title: 'Hello'
         }
     },
     onLoad() {},
-    methods: {}
+    methods: {
+        showLog(msg: string) {
+            console.log(msg)
+        }
+    }
 })
 </script>
 

@@ -1,38 +1,33 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators":true,
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "types": [
-      "webpack-env",
-      "@dcloudio/types",
-      "miniprogram-api-typings",
-      "mini-types"
-    ],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "strict": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "types": [
+            "webpack-env",
+            "@dcloudio/types",
+            "miniprogram-api-typings",
+            "mini-types"
+        ],
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+    "exclude": ["node_modules", "unpackage", "src/**/*.nvue"],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "typings/**/*.d.ts"
     ]
-  },
-  "exclude": [
-    "node_modules",
-    "unpackage",
-    "src/**/*.nvue"
-  ]
 }
