@@ -16,3 +16,7 @@ export default {
 <style lang="scss">
 @import 'uview-ui/index.scss';
 </style>
+
+<style>
+@import url('tailwindcss/tailwind.css');
+</style>

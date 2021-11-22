@@ -2,9 +2,9 @@
 view.content
   image.logo(src="../../static/logo.png")
     view
-      text.title {{title}} 3232
+      text.title.text-green-500.ml-10 {{title}} 3232
       uv-button(type="primary" @click="()=>showLog('111')") 测试
-      uv-button(type="primary" shape="circle" text="按钮形状" @click="()=>showLog('444')") 123
+      uv-button.mt-20(type="primary" shape="circle" text="按钮形状" @click="()=>showLog('444')") 123
 
 </template>
 
@@ -51,6 +51,5 @@ export default Vue.extend({
 
 .title {
     font-size: 36rpx;
-    color: #8f8f94;
 }
 </style>

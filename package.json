@@ -95,10 +95,12 @@
     "mini-types": "*",
     "miniprogram-api-typings": "*",
     "node-sass": "^6.0.1",
+    "postcss-class-rename": "^1.0.1",
     "postcss-comment": "^2.0.0",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
     "sass-loader": "10",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^3.0.0",
     "uni-read-pages": "^1.0.5",
     "vue-template-compiler": "^2.6.11"
