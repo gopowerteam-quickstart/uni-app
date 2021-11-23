@@ -2,13 +2,12 @@
 view.content
     image.logo(src='../../static/logo.png')
         view
-            text.title.p-10 {{ title }} 3232
-            uv-button(@click='() => showLog("111")' type='primary') 测试
-            uv-button.mt-20(
+            view.title.p-10 {{ title }} 3232
+            button(@click='() => showLog("111")') 测试
+            button.mt-20.bg-red-500.text-white-500(
                 @click='() => showLog("444")'
                 shape='circle'
                 text='按钮形状'
-                type='primary'
             ) 123
 </template>
 
