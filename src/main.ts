@@ -3,24 +3,30 @@ import App from './App.vue'
 
 import { router, RouterMount } from './router'
 import uView from 'uview-ui'
+import bootstrap from '@/bootstrap'
 
 Vue.use(router)
 Vue.use(uView)
 
 Vue.config.productionTip = false
 
-const app = new Vue({
-    ...App
-})
-
+/**
+ * 页面启动
+ */
 function mountApp() {
+    const app = new Vue({
+        ...App
+    })
+
     // #ifdef H5
     RouterMount(app, router, '#app')
     // #endif
 
     // #ifndef H5
-    app.$mount() //为了兼容小程序及app端必须这样写才有效果
+    // 兼容小程序
+    app.$mount()
     // #endif
 }
 
-mountApp()
+// 应用启动
+bootstrap().then(mountApp)
