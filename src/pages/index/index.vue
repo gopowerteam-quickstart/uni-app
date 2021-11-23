@@ -5,7 +5,6 @@ view.content
       text.title.text-green-500.ml-10 {{title}} 3232
       uv-button(type="primary" @click="()=>showLog('111')") 测试
       uv-button.mt-20(type="primary" shape="circle" text="按钮形状" @click="()=>showLog('444')") 123
-
 </template>
 
 <script lang="ts">
