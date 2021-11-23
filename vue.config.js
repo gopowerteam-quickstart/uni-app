@@ -2,7 +2,11 @@ const TransformPages = require('uni-read-pages')
 const { webpack } = new TransformPages()
 
 module.exports = {
-    transpileDependencies: ['uview-ui', 'uni-simple-router'],
+    transpileDependencies: [
+        '@dcloudio/uni-ui',
+        'uview-ui',
+        'uni-simple-router'
+    ],
     configureWebpack: {
         plugins: [
             new webpack.DefinePlugin({

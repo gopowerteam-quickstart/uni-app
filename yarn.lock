@@ -1109,6 +1109,11 @@
     "@babel/types" "^7.3.3"
     vue-template-compiler "^2.6.10"
 
+"@dcloudio/uni-ui@^1.4.8":
+  version "1.4.8"
+  resolved "https://registry.npmmirror.com/@dcloudio/uni-ui/download/@dcloudio/uni-ui-1.4.8.tgz#2b9ca4c1070de567c7b4fbbfca9f6b89016e3adb"
+  integrity sha512-9OTJpkuqwxFI2zZ4C0ChEPddTSDUuXNuvJK6OSfCa5VA4nwNb9kYNm6tPjER/1S373/YZr3cBgLszdins3QuxQ==
+
 "@dcloudio/uvm@0.0.4":
   version "0.0.4"
   resolved "https://registry.npmmirror.com/@dcloudio/uvm/download/@dcloudio/uvm-0.0.4.tgz#de5cdd648f72a313d1448058ab2169431cd3c533"
@@ -8083,11 +8088,6 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
-mp-storage@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.npm.taobao.org/mp-storage/download/mp-storage-1.0.3.tgz#67421c1b8ab369a0fa3c3f77936f5801d6ca3fe6"
-  integrity sha1-Z0IcG4qzaaD6PD93k29YAdbKP+Y=
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmmirror.com/ms/download/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -8382,6 +8382,11 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.nlark.com/normalize-url/download/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha1-suHE3E98bVd0PfczpPWXjRhlBVk=
+
+normalize.css@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.npm.taobao.org/normalize.css/download/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
+  integrity sha1-m5iiCHOLnMJjTKrLxC0THJdIe/M=
 
 npm-run-path@^2.0.0:
   version "2.0.2"

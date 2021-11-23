@@ -1,6 +1,7 @@
 <template lang="pug">
 view.content
-    image.logo(src='../../static/logo.png')
+    uni-card.w-full(title="title")
+        image.logo(src='../../static/logo.png')
         view
             view.title.p-10.text-red-500.text-4xl {{ title }} 3232
             button(@click='() => showLog("111")') 测试

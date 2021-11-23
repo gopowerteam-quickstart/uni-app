@@ -13,11 +13,11 @@ export default {
 }
 </script>
 
+<style>
+@import url('tailwindcss/tailwind.css');
+</style>
+
 <style lang="scss">
 @import '@/assets/styles/default.scss';
 @import 'uview-ui/index.scss';
-</style>
-
-<style>
-@import url('tailwindcss/tailwind.css');
 </style>
