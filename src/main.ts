@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import { router, RouterMount } from './router'
+import { router, RouterMount } from '@/router'
+import store from '@/store'
+
 import uView from 'uview-ui'
 import bootstrap from '@/bootstrap'
 
@@ -9,6 +11,7 @@ Vue.use(router)
 Vue.use(uView)
 
 Vue.config.productionTip = false
+Vue.prototype.$store = store
 
 /**
  * 页面启动

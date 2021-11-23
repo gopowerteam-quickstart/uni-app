@@ -8,20 +8,32 @@ view.content
                 @click='() => showLog("444")'
                 shape='circle'
                 text='按钮形状'
-            ) 123
+            ) {{ token }}
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
+import { namespace } from 'vuex-class'
+
+const UserModule = namespace('user')
+
 @Component
 export default class Index extends Vue {
+    @UserModule.State
+    public token: string
+
+    @UserModule.Mutation
+    private updateUserToken
+
     public title = 'Hello'
 
     public onLoad() {}
 
     public showLog(msg: string) {
         console.log(msg)
+
+        this.updateUserToken(this.token + '1')
     }
 }
 </script>

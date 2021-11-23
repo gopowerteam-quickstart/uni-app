@@ -8078,6 +8078,11 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
+mp-storage@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/mp-storage/download/mp-storage-1.0.3.tgz#67421c1b8ab369a0fa3c3f77936f5801d6ca3fe6"
+  integrity sha1-Z0IcG4qzaaD6PD93k29YAdbKP+Y=
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmmirror.com/ms/download/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -10531,6 +10536,11 @@ shellwords@^0.1.1:
   resolved "https://registry.nlark.com/shellwords/download/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha1-1rkYHBpI05cyTISHHvvPxz/AZUs=
 
+shvl@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.nlark.com/shvl/download/shvl-2.0.3.tgz#eb4bd37644f5684bba1fc52c3010c96fb5e6afd1"
+  integrity sha1-60vTdkT1aEu6H8UsMBDJb7Xmr9E=
+
 side-channel@^1.0.4:
   version "1.0.4"
   resolved "https://registry.nlark.com/side-channel/download/side-channel-1.0.4.tgz#efce5c8fdc104ee751b25c58d4290011fa5ea2cf"
@@ -11880,6 +11890,19 @@ vue@2.6.14:
   version "2.6.14"
   resolved "https://registry.npmmirror.com/vue/download/vue-2.6.14.tgz?cache=0&sync_timestamp=1636947969556&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fvue%2Fdownload%2Fvue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
   integrity sha1-5RqlJQJQ1Wmj+606ilpofWA24jU=
+
+vuex-class@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.nlark.com/vuex-class/download/vuex-class-0.3.2.tgz#c7e96a076c1682137d4d23a8dcfdc63f220e17a8"
+  integrity sha1-x+lqB2wWghN9TSOo3P3GPyIOF6g=
+
+vuex-persistedstate@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.nlark.com/vuex-persistedstate/download/vuex-persistedstate-4.1.0.tgz?cache=0&sync_timestamp=1632227055549&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvuex-persistedstate%2Fdownload%2Fvuex-persistedstate-4.1.0.tgz#127165f85f5b4534fb3170a5d3a8be9811bd2a53"
+  integrity sha1-EnFl+F9bRTT7MXCl06i+mBG9KlM=
+  dependencies:
+    deepmerge "^4.2.2"
+    shvl "^2.0.3"
 
 vuex@^3.2.0:
   version "3.6.2"
