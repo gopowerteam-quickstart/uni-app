@@ -87,6 +87,7 @@
         "@dcloudio/vue-cli-plugin-uni-optimize": "2.0.0-32920211120001",
         "@dcloudio/webpack-uni-mp-loader": "2.0.0-32920211120001",
         "@dcloudio/webpack-uni-pages-loader": "2.0.0-32920211120001",
+        "@prettier/plugin-pug": "^1.17.2",
         "@vue/cli-plugin-babel": "4.5.15",
         "@vue/cli-plugin-typescript": "*",
         "@vue/cli-service": "4.5.15",
