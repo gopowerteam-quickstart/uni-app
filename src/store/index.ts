@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-/* #ifdef MP-WEIXIN */
-import { localStorage } from 'mp-storage'
-/* #endif */
 
 // modules
 import UserModule from './modules/user.module'
@@ -19,8 +16,12 @@ export default new Vuex.Store({
     plugins: [
         createPersistedState({
             key: 'vuex',
-            storage: localStorage,
-            paths: []
+            storage: {
+                getItem: key => uni.getStorageSync(key),
+                setItem: (key, value) => uni.setStorageSync(key, value),
+                removeItem: key => uni.removeStorageSync(key)
+            },
+            paths: ['user.token']
         })
     ]
 })

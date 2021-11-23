@@ -2,13 +2,13 @@
 view.content
     image.logo(src='../../static/logo.png')
         view
-            view.title.p-10 {{ title }} 3232
+            view.title.p-10.text-red-500.text-4xl {{ title }} 3232
             button(@click='() => showLog("111")') 测试
             button.mt-20.bg-red-500.text-white-500(
                 @click='() => showLog("444")'
                 shape='circle'
                 text='按钮形状'
-            ) {{ token }}
+            ) {{ token }} -go123
 </template>
 
 <script lang="ts">
@@ -58,7 +58,5 @@ export default class Index extends Vue {
 }
 
 .title {
-    font-size: 36rpx;
-    color: $uni-color-primary;
 }
 </style>
