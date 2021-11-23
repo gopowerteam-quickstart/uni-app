@@ -8383,11 +8383,6 @@ normalize-url@^3.0.0:
   resolved "https://registry.nlark.com/normalize-url/download/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha1-suHE3E98bVd0PfczpPWXjRhlBVk=
 
-normalize.css@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.npm.taobao.org/normalize.css/download/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
-  integrity sha1-m5iiCHOLnMJjTKrLxC0THJdIe/M=
-
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.npmmirror.com/npm-run-path/download/npm-run-path-2.0.2.tgz?cache=0&sync_timestamp=1633420566316&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fnpm-run-path%2Fdownload%2Fnpm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -11133,6 +11128,11 @@ symbol-tree@^3.2.2:
   version "3.2.4"
   resolved "https://registry.npm.taobao.org/symbol-tree/download/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha1-QwY30ki6d+B4iDlR+5qg7tfGP6I=
+
+tailwindcss-miniprogram-preset@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmmirror.com/tailwindcss-miniprogram-preset/download/tailwindcss-miniprogram-preset-1.0.7.tgz#775202e7a7dc7004a3bf83e3cab3cb555091f5b4"
+  integrity sha1-d1IC56fccASjv4PjyrPLVVCR9bQ=
 
 "tailwindcss@npm:@tailwindcss/postcss7-compat":
   version "2.2.17"

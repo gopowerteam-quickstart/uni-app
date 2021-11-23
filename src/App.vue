@@ -13,11 +13,15 @@ export default {
 }
 </script>
 
-<style>
-@import url('tailwindcss/tailwind.css');
-</style>
-
 <style lang="scss">
 @import '@/assets/styles/default.scss';
 @import 'uview-ui/index.scss';
+</style>
+
+<style lang="scss">
+// 小程序不需要 'base' 'components'，里面标签是给 html 准备的
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/*每个页面公共css */
 </style>

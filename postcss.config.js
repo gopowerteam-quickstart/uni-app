@@ -15,9 +15,9 @@ module.exports = {
             }
         }),
         require('tailwindcss'),
-        require('postcss-class-rename')({
-            '\\\\.': '_' // 兼容小程序，将类名带 .和/ 替换成 _
-        }),
+        // require('postcss-class-rename')({
+        //     '\\\\.': '_' // 兼容小程序，将类名带 .和/ 替换成 _
+        // }),
         require('autoprefixer')({
             remove: process.env.UNI_PLATFORM !== 'h5'
         }),
