@@ -2,34 +2,32 @@
 view.content
   image.logo(src="../../static/logo.png")
     view
-      text.title.text-green-500.ml-10 {{title}} 3232
+      text.title.ml-10 {{title}} 3232
       uv-button(type="primary" @click="()=>showLog('111')") 测试
       uv-button.mt-20(type="primary" shape="circle" text="按钮形状" @click="()=>showLog('444')") 123
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { uvButton } from '@/shared/uview'
+import { Component, Vue } from 'vue-property-decorator'
 
-export default Vue.extend({
+@Component({
     components: {
         uvButton
-    },
-    data() {
-        return {
-            title: 'Hello'
-        }
-    },
-    onLoad() {},
-    methods: {
-        showLog(msg: string) {
-            console.log(msg)
-        }
     }
 })
+export default class Index extends Vue {
+    public title = 'Hello'
+
+    public onLoad() {}
+
+    public showLog(msg: string) {
+        console.log(msg)
+    }
+}
 </script>
 
-<style>
+<style lang="scss" scoped>
 .content {
     display: flex;
     flex-direction: column;
@@ -50,5 +48,6 @@ export default Vue.extend({
 
 .title {
     font-size: 36rpx;
+    color: $uni-color-primary;
 }
 </style>
