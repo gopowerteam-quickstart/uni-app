@@ -2,7 +2,7 @@ import { RequestService } from '@gopowerteam/http-request'
 import { appConfig } from '@/config/app.config'
 import { useStore } from '@/store'
 import mpAdapter from 'axios-miniprogram-adapter'
-import { TokenService } from '../http/token.service'
+import { TokenService } from '@/http/extends/token.service'
 
 export function httpSetup() {
     // 配置服务端信息

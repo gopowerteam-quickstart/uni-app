@@ -1,25 +1,16 @@
 <template lang="pug">
-view.content
-    uni-card.w-full(title='title')
-        image.logo(src='../../static/logo.png')
-        view
-            view.title.p-10.text-4xl {{ title }} 3232
-            button(@click='() => showLog("111")') 测试
-            button.mt-20.bg-red-500.text-white-500(
-                @click='() => showLog("444")'
-                shape='circle'
-                text='按钮形状'
-            ) {{ token }} -go123
+page-container
+    .btn.text-red-500 123
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
 import { namespace } from 'vuex-class'
-
 const UserModule = namespace('user')
 
-@Component
+@Component({
+    components: {}
+})
 export default class Index extends Vue {
     @UserModule.State
     public token: string
