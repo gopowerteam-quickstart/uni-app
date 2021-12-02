@@ -1,9 +1,9 @@
 <template lang="pug">
 view.content
-    uni-card.w-full(title="title")
+    uni-card.w-full(title='title')
         image.logo(src='../../static/logo.png')
         view
-            view.title.p-10.text-red-500.text-4xl {{ title }} 3232
+            view.title.p-10.text-4xl {{ title }} 3232
             button(@click='() => showLog("111")') 测试
             button.mt-20.bg-red-500.text-white-500(
                 @click='() => showLog("444")'
@@ -59,5 +59,6 @@ export default class Index extends Vue {
 }
 
 .title {
+    color: yellow;
 }
 </style>

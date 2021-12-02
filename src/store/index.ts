@@ -3,15 +3,20 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 // modules
-import UserModule from './modules/user.module'
-import AppModule from './modules/app.module'
+import UserModule, { UserState } from './modules/user.module'
+import AppModule, { AppState } from './modules/app.module'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+interface StoreModule {
+    app: AppState
+    user: UserState
+}
+
+const store = new Vuex.Store<StoreModule>({
     modules: {
-        [AppModule.key]: AppModule.module,
-        [UserModule.key]: UserModule.module
+        app: AppModule,
+        user: UserModule
     },
     plugins: [
         createPersistedState({
@@ -25,3 +30,5 @@ export default new Vuex.Store({
         })
     ]
 })
+
+export const useStore = () => store

@@ -1,9 +1,9 @@
-interface UserState {
+export interface UserState {
     token: string
     current: any
 }
 
-const module = {
+export default {
     namespaced: true,
     state: (): UserState => ({
         token: 'zhuchentong',
@@ -14,9 +14,4 @@ const module = {
             state.token = value
         }
     }
-}
-
-export default {
-    key: 'user',
-    module
 }

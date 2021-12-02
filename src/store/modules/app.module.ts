@@ -1,20 +1,15 @@
-interface UserState {
+export interface AppState {
     ready: boolean
 }
 
-const module = {
+export default {
     namespaced: true,
-    state: (): UserState => ({
+    state: (): AppState => ({
         ready: false
     }),
     mutations: {
-        updateReady(state: UserState) {
+        updateReady(state: AppState) {
             state.ready = true
         }
     }
-}
-
-export default {
-    key: 'app',
-    module
 }
