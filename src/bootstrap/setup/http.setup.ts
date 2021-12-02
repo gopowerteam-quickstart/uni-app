@@ -1,13 +1,11 @@
-import { RequestService } from '@gopowerteam/http-request'
 import { appConfig } from '@/config/app.config'
 import { useStore } from '@/store'
-import mpAdapter from 'axios-miniprogram-adapter'
 import { TokenService } from '@/http/extends/token.service'
+import { RequestService } from '@/http/core'
 
 export function httpSetup() {
     // 配置服务端信息
     RequestService.setConfig({
-        adapter: mpAdapter,
         gateway: {
             default: appConfig.http.gateway
         },
@@ -22,7 +20,7 @@ export function httpSetup() {
 
     // 添加状态拦截器
     RequestService.interceptors.status.use(respone => {
-        return respone.status === 200
+        return respone.statusCode === 200
     })
 
     // 添加成功拦截器
@@ -48,19 +46,19 @@ export function httpSetup() {
         ])
 
         if (respone) {
-            const responseMessage = (respone.data || {}).message
-            const errorMessage =
-                responseMessage ||
-                messageList.get(respone.status) ||
-                defaultError
-            if (respone.status === 401) {
-                // TODO: 待验证
-                // store.dispatch('updateToken', {
-                //     access_token: '',
-                //     refresh_token: ''
-                // })
-                // router.push('/login')
-            }
+            // const responseMessage = (respone.errMsg || {}).message
+            // const errorMessage =
+            //     responseMessage ||
+            //     messageList.get(respone.status) ||
+            //     defaultError
+            // if (respone.status === 401) {
+            //     // TODO: 待验证
+            //     // store.dispatch('updateToken', {
+            //     //     access_token: '',
+            //     //     refresh_token: ''
+            //     // })
+            //     // router.push('/login')
+            // }
             //
         } else {
             // Notification.error(defaultError)

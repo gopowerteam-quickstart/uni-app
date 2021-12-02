@@ -1,5 +1,5 @@
 export const appConfig = {
     http: {
-        gateway: process.env.GATEWAY_DEFAULT as string
+        gateway: process.env.VUE_APP_GATEWAY as string
     }
 } as const

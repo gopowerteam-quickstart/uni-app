@@ -1,7 +1,7 @@
 import {
   ExtendService,
   RequestParams
-} from '@gopowerteam/http-request'
+} from '@/http/core'
 
 export class SortService extends ExtendService {
   private sort: { [key: string]: 'asc' | 'desc' } = {}
