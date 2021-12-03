@@ -20,7 +20,7 @@ const store = new Vuex.Store<StoreModule>({
     },
     plugins: [
         createPersistedState({
-            key: 'vuex',
+            key: '__STORE__',
             storage: {
                 getItem: key => uni.getStorageSync(key),
                 setItem: (key, value) => uni.setStorageSync(key, value),
