@@ -1,5 +1,7 @@
 ## 0.1.0 (2021-12-03)
 
+* fix: 测试自动更新日志 ([d5a56cd](https://github.com/gopowerteam/quickstart.uniapp-template/commit/d5a56cd))
+* feat: 测试自动更新日志 ([95ae827](https://github.com/gopowerteam/quickstart.uniapp-template/commit/95ae827))
 * feat: 完成代码提交检测 ([aae488a](https://github.com/gopowerteam/quickstart.uniapp-template/commit/aae488a))
 * 更新http模块 ([49341c9](https://github.com/gopowerteam/quickstart.uniapp-template/commit/49341c9))
 * 添加更新检测支持 ([3b55388](https://github.com/gopowerteam/quickstart.uniapp-template/commit/3b55388))
