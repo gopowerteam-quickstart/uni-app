@@ -8,8 +8,8 @@
         ]
     },
     "scripts": {
-        "log": "conventional-changelog -i CHANGELOG.md -s -r 0",
-        "commit": "npm run log & git add . & node ./node_modules/cz-customizable/standalone.js",
+        "log": "conventional-changelog -i README.md -s -r 0",
+        "commit": "node ./node_modules/cz-customizable/standalone.js",
         "prepare": "husky install",
         "analyzer": "cross-env use_analyzer=true npm run build:mp-weixin",
         "uni-upgrade": "node ./scripts/uni-upgrade/index.js",

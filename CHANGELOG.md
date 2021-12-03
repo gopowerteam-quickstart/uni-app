@@ -1,5 +1,6 @@
 ## 0.1.0 (2021-12-03)
 
+* feat: 完成代码提交检测 ([aae488a](https://github.com/gopowerteam/quickstart.uniapp-template/commit/aae488a))
 * 更新http模块 ([49341c9](https://github.com/gopowerteam/quickstart.uniapp-template/commit/49341c9))
 * 添加更新检测支持 ([3b55388](https://github.com/gopowerteam/quickstart.uniapp-template/commit/3b55388))
 * 添加启动逻辑 ([6cbc158](https://github.com/gopowerteam/quickstart.uniapp-template/commit/6cbc158))
