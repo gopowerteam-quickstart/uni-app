@@ -1,9 +1,10 @@
 <template lang="pug">
 page-container
-    .btn.text-red-500 123
+    .btn.text-red-500(@click='showLog') 123
 </template>
 
 <script lang="ts">
+import { LogService } from '@/shared/utils/log.service'
 import { Component, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 const UserModule = namespace('user')
@@ -12,6 +13,8 @@ const UserModule = namespace('user')
     components: {}
 })
 export default class Index extends Vue {
+    private logger = new LogService()
+
     @UserModule.State
     public token: string
 
@@ -23,8 +26,7 @@ export default class Index extends Vue {
     public onLoad() {}
 
     public showLog(msg: string) {
-        console.log(msg)
-
+        this.logger.log('111')
         this.updateUserToken(this.token + '1')
     }
 }

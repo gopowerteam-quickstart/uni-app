@@ -1,5 +1,3 @@
-const {
-  generateRequestFile
-} = require('./generate-request-file')
+const { generateRequestFile } = require('./generate-request-file')
 
 generateRequestFile()
