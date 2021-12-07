@@ -1,5 +1,5 @@
 import { useStore } from '@/store'
-import { format } from 'date-fns'
+import dayjs from 'dayjs'
 
 export enum LogType {
     log = 1,
@@ -130,10 +130,7 @@ export class LogService {
         const record = LogService.formatLogger(logger)
 
         // 获取存储组
-        const storgetKey = `${LOG_STORAGE_KEY}${format(
-            Date.now(),
-            'yyyy-MM-dd'
-        )}__`
+        const storgetKey = `${LOG_STORAGE_KEY}${dayjs().format('YYYY-MM-DD')}__`
 
         // 获取日志Storage
         const storage = uni.getStorageSync(storgetKey) || []
@@ -153,7 +150,7 @@ export class LogService {
 
         return {
             type: logger.name,
-            date: format(Date.now(), 'yyyy-MM-dd HH:MM:ss'),
+            date: dayjs().format('YYYY-MM-DD HH:MM:ss'),
             user: store.state.user.current,
             systemInfo: LogService.systemInfo
         }

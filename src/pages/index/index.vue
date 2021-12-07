@@ -26,8 +26,7 @@ export default class Index extends Vue {
     public onLoad() {}
 
     public showLog(msg: string) {
-        this.logger.log('111')
-        this.updateUserToken(this.token + '1')
+        this.logger.warn('111')
     }
 }
 </script>
