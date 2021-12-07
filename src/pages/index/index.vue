@@ -4,7 +4,7 @@ page-container
 </template>
 
 <script lang="ts">
-import { LogService } from '@/shared/utils/log.service'
+import { Logger, LogService } from '@/shared/utils/log.service'
 import { Component, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 const UserModule = namespace('user')
@@ -13,7 +13,8 @@ const UserModule = namespace('user')
     components: {}
 })
 export default class Index extends Vue {
-    private logger = new LogService()
+    @Logger
+    private readonly logger: LogService
 
     @UserModule.State
     public token: string

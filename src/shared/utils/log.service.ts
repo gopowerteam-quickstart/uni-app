@@ -17,28 +17,33 @@ const LoggerMapper = {
         name: '调试',
         styles: {
             type: 'color:#17cf67;',
-            date: 'color:#fcf4ca;'
+            date: 'color:#51a8ff;'
         }
     },
     [LogType.warn]: {
         name: '警告',
         styles: {
             type: 'color:#FFAC1D;',
-            date: 'color:#fcf4ca;'
+            date: 'color:#51a8ff;'
         }
     },
     [LogType.error]: {
         name: '错误',
         styles: {
             type: 'color:#e51579;',
-            date: 'color:#fcf4ca;'
+            date: 'color:#51a8ff;'
         }
     }
 }
 
 const LOG_STORAGE_KEY = '__LOG__'
 
-function Logger(level: LogType) {
+/**
+ * 日志操作装饰器
+ * @param level
+ * @returns
+ */
+function LogPrinter(level: LogType) {
     return function (
         target: any,
         propertyKey: string,
@@ -56,6 +61,29 @@ function Logger(level: LogType) {
             }
         }
     }
+}
+
+/**
+ * 日志实例装饰器
+ * @param target
+ * @param propertyName
+ */
+export function Logger(target: Object, propertyName: string) {
+    // 属性值
+    const logger = new LogService()
+
+    // 属性读取访问器
+    const getter = () => logger
+
+    // 删除属性
+    // if (delete this[propertyName]) {
+    // 创建新属性及其读取访问器、写入访问器
+    Object.defineProperty(target, propertyName, {
+        get: getter,
+        enumerable: true,
+        configurable: true
+    })
+    // }
 }
 
 export class LogService {
@@ -81,13 +109,13 @@ export class LogService {
         LogService.systemInfo = uni.getSystemInfoSync()
     }
 
-    @Logger(LogType.log)
+    @LogPrinter(LogType.log)
     public log(...message: string[]) {}
 
-    @Logger(LogType.warn)
+    @LogPrinter(LogType.warn)
     public warn(...message: string[]) {}
 
-    @Logger(LogType.error)
+    @LogPrinter(LogType.error)
     public error(...message: string[]) {}
 
     /**
