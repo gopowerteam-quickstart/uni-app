@@ -26,7 +26,7 @@ const store = new Vuex.Store<StoreModule>({
                 setItem: (key, value) => uni.setStorageSync(key, value),
                 removeItem: key => uni.removeStorageSync(key)
             },
-            paths: ['user.token']
+            paths: ['user.token', 'user.code']
         })
     ]
 })

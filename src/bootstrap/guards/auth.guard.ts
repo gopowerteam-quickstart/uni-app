@@ -1,9 +1,20 @@
+import { AuthService } from '@/shared/utils/auth.service'
 import { switchMap, switchMapTo } from 'rxjs/operators'
+
+const userLoginByh5 = page => {}
+
+const userLoginByWeapp = () => {}
+
+const userLoginByApp = () => {}
 
 // 认证状态检测
 const checkPageAuth = page => {
     // 检测是否设置认证
-    if (!page || !page.meta || !page.meta.auth) return true
+    if (page && page.meta && page.meta.auth === true) {
+        userLoginByh5(page)
+
+        return false
+    }
 
     return true
 }

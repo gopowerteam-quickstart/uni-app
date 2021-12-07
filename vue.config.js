@@ -2,6 +2,12 @@ const TransformPages = require('uni-read-pages')
 const { webpack } = new TransformPages()
 
 module.exports = {
+    indexPath: 'index.h5.html',
+    devServer: {
+        host: '0.0.0.0',
+        port: 80,
+        disableHostCheck: true
+    },
     transpileDependencies: [
         '@dcloudio/uni-ui',
         'uview-ui',

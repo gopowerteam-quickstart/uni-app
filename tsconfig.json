@@ -14,12 +14,7 @@
         "sourceMap": true,
         "skipLibCheck": true,
         "baseUrl": ".",
-        "types": [
-            "webpack-env",
-            "@dcloudio/types",
-            "miniprogram-api-typings",
-            "mini-types"
-        ],
+        "types": ["webpack-env", "@dcloudio/types", "mini-types"],
         "paths": {
             "@/*": ["./src/*"]
         },
