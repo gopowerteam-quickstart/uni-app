@@ -1249,11 +1249,6 @@
     "@babel/types" "^7.3.3"
     vue-template-compiler "^2.6.10"
 
-"@dcloudio/uni-ui@^1.4.9":
-  version "1.4.9"
-  resolved "https://registry.npmmirror.com/@dcloudio/uni-ui/download/@dcloudio/uni-ui-1.4.9.tgz#98827252c9a0d930bc9310e8162370a582ad1c1c"
-  integrity sha512-S4HcIUipswVysOzet8Z6YR8B77Frz4qvSmch1Aj7ddKWsD9Y55sEdRs7mjI32iqsXNXZeZtG05bgfEusDqQGtQ==
-
 "@dcloudio/uvm@0.0.4":
   version "0.0.4"
   resolved "https://registry.npmmirror.com/@dcloudio/uvm/download/@dcloudio/uvm-0.0.4.tgz#de5cdd648f72a313d1448058ab2169431cd3c533"
@@ -4880,11 +4875,6 @@ data-urls@^1.1.0:
     abab "^2.0.0"
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
-
-date-fns@^2.27.0:
-  version "2.27.0"
-  resolved "https://registry.npmmirror.com/date-fns/download/date-fns-2.27.0.tgz#e1ff3c3ddbbab8a2eaadbb6106be2929a5a2d92b"
-  integrity sha512-sj+J0Mo2p2X1e306MHq282WS4/A8Pz/95GIFcsPNMPMZVI3EUrAdSv90al1k+p74WGLCruMXk23bfEDZa71X9Q==
 
 dateformat@^3.0.0:
   version "3.0.3"
@@ -8743,11 +8733,6 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-lodash-es@^4.17.21:
-  version "4.17.21"
-  resolved "https://registry.nlark.com/lodash-es/download/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
-  integrity sha1-Q+YmxG5lkbd1C+srUBFzkMYJ4+4=
-
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.nlark.com/lodash.debounce/download/lodash.debounce-4.0.8.tgz?cache=0&sync_timestamp=1618847031591&other_urls=https%3A%2F%2Fregistry.nlark.com%2Flodash.debounce%2Fdownload%2Flodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
@@ -9898,11 +9883,6 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/os-tmpdir/download/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
-
-override-console-log@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmmirror.com/override-console-log/download/override-console-log-1.1.1.tgz#86640b116b1eefddd2d94f18bbb01f509068e23a"
-  integrity sha1-hmQLEWse793S2U8Yu7AfUJBo4jo=
 
 p-each-series@^2.1.0:
   version "2.2.0"
@@ -11083,11 +11063,6 @@ quick-lru@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npmmirror.com/quick-lru/download/quick-lru-5.1.1.tgz?cache=0&sync_timestamp=1637478663596&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fquick-lru%2Fdownload%2Fquick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha1-NmST5rPkKjpoheLpnRj4D7eoyTI=
-
-ramda@^0.27.1:
-  version "0.27.1"
-  resolved "https://registry.nlark.com/ramda/download/ramda-0.27.1.tgz?cache=0&sync_timestamp=1624608053051&other_urls=https%3A%2F%2Fregistry.nlark.com%2Framda%2Fdownload%2Framda-0.27.1.tgz#66fc2df3ef873874ffc2da6aa8984658abacf5c9"
-  integrity sha1-Zvwt8++HOHT/wtpqqJhGWKus9ck=
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
