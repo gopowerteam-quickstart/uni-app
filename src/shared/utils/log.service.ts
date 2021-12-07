@@ -43,7 +43,7 @@ const LOG_STORAGE_KEY = '__LOG__'
  * @param level
  * @returns
  */
-function LogPrinter(level: LogType) {
+function LogProvider(level: LogType) {
     return function (
         target: any,
         propertyKey: string,
@@ -83,7 +83,6 @@ export function Logger(target: Object, propertyName: string) {
         enumerable: true,
         configurable: true
     })
-    // }
 }
 
 export class LogService {
@@ -109,13 +108,13 @@ export class LogService {
         LogService.systemInfo = uni.getSystemInfoSync()
     }
 
-    @LogPrinter(LogType.log)
+    @LogProvider(LogType.log)
     public log(...message: string[]) {}
 
-    @LogPrinter(LogType.warn)
+    @LogProvider(LogType.warn)
     public warn(...message: string[]) {}
 
-    @LogPrinter(LogType.error)
+    @LogProvider(LogType.error)
     public error(...message: string[]) {}
 
     /**
