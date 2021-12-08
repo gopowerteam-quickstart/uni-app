@@ -1,14 +1,18 @@
 <script lang="ts">
+import { LogService } from './shared/utils/log.service'
+
+const logger = new LogService()
+
 export default {
     mpType: 'app',
     onLaunch: function () {
-        console.log('App Launch')
+        logger.log('App Launch')
     },
     onShow: function () {
-        console.log('App Show')
+        logger.log('App Show')
     },
     onHide: function () {
-        console.log('App Hide')
+        logger.log('App Hide')
     }
 }
 </script>
