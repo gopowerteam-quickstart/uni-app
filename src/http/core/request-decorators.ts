@@ -5,7 +5,7 @@ import { Model } from './request-modal'
 /**
  * 网络请求行为装饰器
  */
-export function Request({
+export function RequestAction({
     server,
     model,
     force

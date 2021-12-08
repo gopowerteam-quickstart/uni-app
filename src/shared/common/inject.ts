@@ -1,7 +1,10 @@
+import { LogService } from '../utils/log.service'
+
 type Constructor<T> = new (...args: any[]) => T
 
 /**
- * 日志实例装饰器
+ * 注入实例装饰器
+ * 因与VUE的Inject易冲突故提供其他具名注入器
  * @param target
  * @param propertyName
  */
@@ -20,4 +23,20 @@ export function Inject<T>(Service: Constructor<T>) {
             configurable: true
         })
     }
+}
+
+/**
+ * 日志实例装饰器
+ * @param target
+ * @param propertyName
+ */
+export const Logger = Inject(LogService)
+
+/**
+ * 请求实例装饰器
+ * @param target
+ * @param propertyName
+ */
+export function Request<T>(Service: Constructor<T>) {
+    return Inject(Service)
 }

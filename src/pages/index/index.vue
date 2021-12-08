@@ -4,7 +4,8 @@ page-container
 </template>
 
 <script lang="ts">
-import { Logger, LogService } from '@/shared/utils/log.service'
+import { Logger } from '@/shared/common'
+import { LogService } from '@/shared/utils/log.service'
 import { Component, Vue } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 const UserModule = namespace('user')

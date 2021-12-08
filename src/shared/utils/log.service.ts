@@ -63,28 +63,6 @@ function LogProvider(level: LogType) {
     }
 }
 
-/**
- * 日志实例装饰器
- * @param target
- * @param propertyName
- */
-export function Logger(target: Object, propertyName: string) {
-    // 属性值
-    const logger = new LogService()
-
-    // 属性读取访问器
-    const getter = () => logger
-
-    // 删除属性
-    // if (delete this[propertyName]) {
-    // 创建新属性及其读取访问器、写入访问器
-    Object.defineProperty(target, propertyName, {
-        get: getter,
-        enumerable: true,
-        configurable: true
-    })
-}
-
 export class LogService {
     public static logLevel: LogType
     public static storageLevel?: LogType
