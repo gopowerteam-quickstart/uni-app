@@ -17,12 +17,11 @@ export class AuthService {
     ) {
         const state = Math.random().toString(36).slice(2)
         // 创建跳转地址
-        const redirect = encodeURI(`${location.origin}/${url}`)
 
         const params = qs.stringify({
             appid: appConfig.wechat.appid,
             scope,
-            redirect_uri: redirect,
+            redirect_uri: url,
             response_type: 'code',
             state
         })
@@ -30,28 +29,39 @@ export class AuthService {
         return `${WECHAT_AUTH_URL}?${params}#wechat_redirect`
     }
 
-    // private static generateRedirect(page, query) {
-    //     const queryStr = encodeURIComponent(JSON.stringify(query))
+    /**
+     * 创建跳转地址
+     * @param page
+     * @param query
+     * @returns
+     */
+    private static generateURL(
+        page: string = DEFAULT_AUTH_PAGE,
+        query?: { [key: string]: string | boolean | number }
+    ) {
+        const params = query
+            ? qs.stringify(query, { addQueryPrefix: true })
+            : ''
 
-    //     return encodeURIComponent(
-    //         `${appConfig.host}${page || '/pages/wechat-login/wechat-login'}`
-    //     )
-    //     //?redirect=${queryStr}
-    // }
+        return encodeURI(`${location.origin}/${page}${params}`)
+    }
 
     /**
      * 请求用户Code
      */
     public static requestUserCode() {
-        const url = this.createAuthUrl('snsapi_base')
+        const url = this.createAuthUrl('snsapi_base', this.generateURL())
         location.href = url
     }
 
     /**
      * 请求用户信息
      */
-    public static reqestUserInfo() {
-        const url = this.createAuthUrl('snsapi_userinfo')
+    public static reqestUserInfo(page, query?) {
+        const url = this.createAuthUrl(
+            'snsapi_userinfo',
+            this.generateURL(page, query)
+        )
         location.href = url
     }
 }

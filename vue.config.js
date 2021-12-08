@@ -8,7 +8,11 @@ module.exports = {
         port: 80,
         disableHostCheck: true
     },
-    transpileDependencies: ['uview-ui', 'uni-simple-router'],
+    transpileDependencies: [
+        '@dcloudio/uni-ui',
+        'uview-ui',
+        'uni-simple-router'
+    ],
     configureWebpack: {
         plugins: [
             new webpack.DefinePlugin({

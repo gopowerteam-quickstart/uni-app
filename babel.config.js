@@ -34,19 +34,18 @@ if (
     } catch (e) {}
 }
 
-// 移除uni-ui
-// process.UNI_LIBRARIES = process.UNI_LIBRARIES || ['@dcloudio/uni-ui']
-// process.UNI_LIBRARIES.forEach(libraryName => {
-//     plugins.push([
-//         'import',
-//         {
-//             libraryName: libraryName,
-//             customName: name => {
-//                 return `${libraryName}/lib/${name}/${name}`
-//             }
-//         }
-//     ])
-// })
+process.UNI_LIBRARIES = process.UNI_LIBRARIES || ['@dcloudio/uni-ui']
+process.UNI_LIBRARIES.forEach(libraryName => {
+    plugins.push([
+        'import',
+        {
+            libraryName: libraryName,
+            customName: name => {
+                return `${libraryName}/lib/${name}/${name}`
+            }
+        }
+    ])
+})
 
 module.exports = {
     presets: [
