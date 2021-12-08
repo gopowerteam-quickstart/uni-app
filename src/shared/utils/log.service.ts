@@ -87,13 +87,13 @@ export class LogService {
     }
 
     @LogProvider(LogType.log)
-    public log(...message: string[]) {}
+    public log(...message: any[]) {}
 
     @LogProvider(LogType.warn)
-    public warn(...message: string[]) {}
+    public warn(...message: any[]) {}
 
     @LogProvider(LogType.error)
-    public error(...message: string[]) {}
+    public error(...message: any[]) {}
 
     /**
      * 写入日志
@@ -102,17 +102,16 @@ export class LogService {
      */
     public static printLoggor(level, message) {
         const logger = LoggerMapper[level]
-        const messageStyle = 'color:unset;'
 
         // 获取日志状态数据
         const record = LogService.formatLogger(logger)
 
         // 打印日志
         console.log(
-            `%c[${record.type}] %c${record.date} -> %c${message.join(' ')}`,
+            `%c[${record.type}] %c${record.date} ->`,
             logger.styles.type,
             logger.styles.date,
-            messageStyle
+            ...message
         )
 
         // Error状态打印堆栈信息
