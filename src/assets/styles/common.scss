@@ -4,15 +4,15 @@
 @each $var in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10) {
     .space-x-#{$var} {
         & > *,
-        view,
-        text {
+        & > view,
+        & > text {
             margin-left: #{$var * 2}px;
             margin-right: #{$var * 2}px;
         }
 
         & > *,
-        view,
-        text {
+        & > view,
+        & > text {
             &:first-child {
                 margin-left: 0;
                 margin-right: #{$var * 2}px;
@@ -20,8 +20,8 @@
         }
 
         & > *,
-        view,
-        text {
+        & > view,
+        & > text {
             *:last-child {
                 margin-left: #{$var * 2}px;
                 margin-right: 0;
@@ -31,25 +31,25 @@
 
     .space-y-#{$var} {
         & > *,
-        view,
-        text {
+        & > view,
+        & > text {
             margin-top: #{$var * 2}px;
             margin-bottom: #{$var * 2}px;
         }
 
         & > *,
-        view,
-        text {
-            *:last-child {
+        & > view,
+        & > text {
+            &:first-child {
                 margin-top: 0;
                 margin-bottom: #{$var * 2}px;
             }
         }
 
         & > *,
-        view,
-        text {
-            *:last-child {
+        & > view,
+        & > text {
+            &:last-child {
                 margin-top: #{$var * 2}px;
                 margin-bottom: 0;
             }
