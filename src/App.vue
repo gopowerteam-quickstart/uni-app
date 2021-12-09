@@ -19,6 +19,7 @@ export default {
 
 <style lang="scss">
 @import '@/assets/styles/default.scss';
+@import '@/assets/styles/common.scss';
 @import 'uview-ui/index.scss';
 </style>
 

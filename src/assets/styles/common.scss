@@ -1,0 +1,58 @@
+// tailwind中space无法兼容小程序
+// 自行实现兼容版本
+// 小程序不支持通配符实现暂时支持view,text
+@each $var in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10) {
+    .space-x-#{$var} {
+        & > *,
+        view,
+        text {
+            margin-left: #{$var * 2}px;
+            margin-right: #{$var * 2}px;
+        }
+
+        & > *,
+        view,
+        text {
+            &:first-child {
+                margin-left: 0;
+                margin-right: #{$var * 2}px;
+            }
+        }
+
+        & > *,
+        view,
+        text {
+            *:last-child {
+                margin-left: #{$var * 2}px;
+                margin-right: 0;
+            }
+        }
+    }
+
+    .space-y-#{$var} {
+        & > *,
+        view,
+        text {
+            margin-top: #{$var * 2}px;
+            margin-bottom: #{$var * 2}px;
+        }
+
+        & > *,
+        view,
+        text {
+            *:last-child {
+                margin-top: 0;
+                margin-bottom: #{$var * 2}px;
+            }
+        }
+
+        & > *,
+        view,
+        text {
+            *:last-child {
+                margin-top: #{$var * 2}px;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

@@ -1,8 +1,7 @@
 import { appConfig } from '@/config/app.config'
 import qs from 'qs'
-
+import { router } from '@/router'
 const WECHAT_AUTH_URL = 'https://open.weixin.qq.com/connect/oauth2/authorize'
-const DEFAULT_AUTH_PAGE = 'pages/index/index'
 
 export class AuthService {
     /**
@@ -13,7 +12,7 @@ export class AuthService {
      */
     private static createAuthUrl(
         scope: 'snsapi_base' | 'snsapi_userinfo',
-        url = DEFAULT_AUTH_PAGE
+        url
     ) {
         const state = Math.random().toString(36).slice(2)
         // 创建跳转地址
@@ -36,9 +35,12 @@ export class AuthService {
      * @returns
      */
     private static generateURL(
-        page: string = DEFAULT_AUTH_PAGE,
-        query?: { [key: string]: string | boolean | number }
+        page = router.currentRoute.path.replace(/^\//, ''),
+        query = router.currentRoute.query || {}
     ) {
+        delete query.code
+        delete query.state
+
         const params = query
             ? qs.stringify(query, { addQueryPrefix: true })
             : ''
@@ -57,7 +59,7 @@ export class AuthService {
     /**
      * 请求用户信息
      */
-    public static reqestUserInfo(page, query?) {
+    public static reqestUserInfo(page?, query?) {
         const url = this.createAuthUrl(
             'snsapi_userinfo',
             this.generateURL(page, query)
