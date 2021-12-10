@@ -56,9 +56,7 @@ export class RequestOption {
                 | 'CONNECT',
 
             // 获取post请求参数
-            data: this.getParamsByMethod(false),
-            // 获取get请求参数
-            params: this.getParamsByMethod(true),
+            data: this.getParams(),
             // 序列化参数:用于GET请求
             paramsSerializer: (params: any) =>
                 stringify(
@@ -127,19 +125,10 @@ export class RequestOption {
     /**
      * 请求类型返回请求参数
      */
-    private getParamsByMethod(isGet: boolean) {
-        // 请求返回非当前请求方式则返回{}
-        if (this.isGetMethod() !== isGet) {
-            return isGet
-                ? { ...this.requestParams?.getOptions()?.urlParams }
-                : {}
-        }
-
-        // 根据请求方式返回数据
-        if (isGet) {
+    private getParams() {
+        if (this.isGetMethod()) {
             return this.filterEmptyData({
-                ...this.requestParams.getData(),
-                ...this.requestParams?.getOptions('urlParams')
+                ...this.requestParams.getData()
             })
         } else {
             return { ...this.requestParams.getData() }

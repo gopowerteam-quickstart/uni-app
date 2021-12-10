@@ -5,7 +5,10 @@ const RouterGuards: any[] = []
 
 const router = createRouter({
     // debugger: true,
-    // encodeURI: false,
+    encodeURI: false,
+    h5: {
+        mode: 'history'
+    },
     platform: process.env.VUE_APP_PLATFORM,
     routes: [...PAGE_ROUTES]
 })
