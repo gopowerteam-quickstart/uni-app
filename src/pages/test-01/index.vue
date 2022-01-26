@@ -1,5 +1,5 @@
 <template lang="pug">
-.loading(@click='router.back()') loading
+view.loading(@click='router.back()') loading
 </template>
 
 <script setup lang="ts">

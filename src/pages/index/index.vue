@@ -1,7 +1,7 @@
 <template lang="pug">
 PageContainer
     HelloWorld
-    .text.font-bold.text-center.m-10(@click='onTestRouter') There is Page Content
+    view.text.font-bold.text-center.m-10(@click='onTestRouter') There is Page Content
 </template>
 
 <script setup lang="ts">
