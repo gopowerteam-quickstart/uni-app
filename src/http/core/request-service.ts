@@ -40,7 +40,7 @@ export class RequestService {
 
     // 通讯异常处理
     public static requestCatchHandle: (
-        respone: UniApp.GeneralCallbackResult
+        respone: UniApp.RequestSuccessCallbackResult
     ) => void
 
     // 全局扩展服务数组
@@ -129,8 +129,12 @@ export class RequestService {
                                 : response
                         )
                     } else {
+                        if (RequestService.requestCatchHandle) {
+                            RequestService.requestCatchHandle(response)
+                        }
+
                         // 通讯失败
-                        resolve(
+                        reject(
                             RequestService.interceptors.error.defined
                                 ? RequestService.interceptors.error.interceptor(
                                       response
@@ -140,10 +144,7 @@ export class RequestService {
                     }
                 },
                 fail: result => {
-                    if (RequestService.requestCatchHandle) {
-                        RequestService.requestCatchHandle(result)
-                    }
-                    reject(result)
+                    // TODO:请求失败处理
                 }
             })
         })

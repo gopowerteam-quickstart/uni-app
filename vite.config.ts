@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import proxyConfig from './proxy.config'
 import autoImportLibs from './auto-import'
-
 import uni from '@dcloudio/vite-plugin-uni'
 import eslint from 'vite-plugin-eslint'
 import request from './scripts/vite-plugins/request'
 import router from './scripts/vite-plugins/router'
+import component from './scripts/vite-plugins/component'
 import autoImport from 'unplugin-auto-import/vite'
+import svg from './scripts/vite-plugins/svg-icon'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,15 +16,23 @@ export default defineConfig({
             '@/': `${resolve(__dirname, 'src')}/`
         }
     },
-    server: {
-        proxy: proxyConfig
-    },
     plugins: [
         uni(),
+
         eslint({
+            fix: true,
             include: ['src/**/*.{vue,ts,tsx}']
         }),
-        router(),
+        svg({
+            dir: 'src/assets/icons',
+            dts: 'typings/icons.d.ts'
+        }),
+        router({
+            dts: 'typings/router.d.ts'
+        }),
+        component({
+            dts: 'typings/component.d.ts'
+        }),
         request({
             root: resolve(process.cwd(), 'src'),
             alias: '@',

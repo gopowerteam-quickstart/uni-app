@@ -43,7 +43,7 @@ const LOG_STORAGE_KEY = '__LOG__'
  * @returns
  */
 function LogProvider(level: LogType) {
-    return function(
+    return function (
         target: any,
         propertyKey: string,
         descriptor: PropertyDescriptor

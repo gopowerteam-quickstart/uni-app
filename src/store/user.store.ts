@@ -12,7 +12,7 @@ interface State {
     /**
      * 当前用户信息
      */
-    current: any
+    current?: User
 }
 
 /**
@@ -40,6 +40,16 @@ export const store = defineStore('user', {
         },
         updateCurrent(value: any) {
             this.current = value
+        },
+        /**
+         * 更新用户信息
+         */
+        updateUserData() {
+            // TODO: 更新用户数据
         }
     }
 })
+
+interface User {
+    // 用户数据结构
+}

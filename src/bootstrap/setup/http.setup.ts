@@ -1,7 +1,8 @@
 import { appConfig } from '@/config/app.config'
 import { TokenService } from '@/http/extends/token.service'
 import { RequestService } from '@/http/core'
-import { SignatureService } from '@/http/extends/signature.service'
+import { useLogin } from '@/shared/hooks'
+import { pages } from '@/pages.json'
 
 export function httpSetup() {
     // 配置服务端信息
@@ -46,27 +47,62 @@ export function httpSetup() {
             [403, '无访问权限']
         ])
 
-        if (respone) {
-            // const responseMessage = (respone.errMsg || {}).message
-            // const errorMessage =
-            //     responseMessage ||
-            //     messageList.get(respone.status) ||
-            //     defaultError
-            // if (respone.status === 401) {
-            //     // TODO: 待验证
-            //     // store.dispatch('updateToken', {
-            //     //     access_token: '',
-            //     //     refresh_token: ''
-            //     // })
-            //     // router.push('/login')
-            // }
-            //
-        } else {
-            // Notification.error(defaultError)
+        // TODO:空报文情况确认
+        if (!respone) return
+
+        // const responseMessage = (respone.errMsg || {}).message
+        // const errorMessage =
+        //     responseMessage ||
+        //     messageList.get(respone.status) ||
+        //     defaultError
+        switch (respone.statusCode) {
+            case 401:
+                onStateCode401(respone)
+                break
         }
+    }
+
+    /**
+     * 401错误码处理
+     * 仅处理登陆过期问题
+     * @param response
+     */
+    function onStateCode401(respone: UniApp.RequestSuccessCallbackResult) {
+        const login = useLogin()
+        const router = useRouter()
+
+        const onLoginSuccess = () => {
+            // 重新加载当前页面
+            router.navigateTo(router.getPath(), {
+                mode: 'relaunch'
+            })
+        }
+
+        const onLoginCancel = () => {
+            const page = pages.find(
+                page => page.path === router.getPath().replace(/^\//, '')
+            )
+
+            // 预留其他情况处理
+            switch (true) {
+                case page?.meta?.needLogin === true:
+                    router.navigateTo('/pages/index/index', {
+                        mode: 'relaunch'
+                    })
+                    break
+            }
+        }
+
+        login
+            .show()
+            .then(() => {
+                onLoginSuccess()
+            })
+            .catch(() => {
+                onLoginCancel()
+            })
     }
 
     // 安装Token认证服务
     RequestService.installExtendService(new TokenService())
-    RequestService.installExtendService(new SignatureService())
 }

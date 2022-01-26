@@ -9,7 +9,7 @@ module.exports = {
     arrowParens: 'avoid',
     pugAttributeSeparator: 'none',
     pugEmptyAttributes: 'none',
-    pugClosingBracketPosition: 'last-line',
+    pugBracketSameLine: false,
     pugSortAttributes: 'asc',
     pugClassNotation: 'literal',
     plugins: [require.resolve('@prettier/plugin-pug')]

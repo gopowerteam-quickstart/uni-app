@@ -1,36 +1,40 @@
 <template lang="pug">
-.page-container(:style='containerStyle')
-    .page-body(v-if="store.ready")
-      slot
-    .page-loading(v-else)
-      page-loading
-    .a {{store.ready}}
-    //- publish-panel(v-if='tabbar')
-    //- tabbar(v-if='tabbar')
+.page-container
+    .page-body(v-if='store.ready')
+        .page-body-content(:style='containerStyle')
+            slot
+        PageTabbar(v-if='tabbar')
+    PageLoading(v-else)
+    PageToast
+    PageDialog
+    PageLogin
 </template>
 
 <script setup lang="ts">
-// import PublishPanel from '@/components/publish-panel.vue'
-// import Tabbar from '@/components/tabbar.vue'
 import type { StyleValue } from 'vue'
 import { computed } from 'vue'
+
 import PageLoading from './page-loading.vue'
+import PageTabbar from './page-tabbar.vue'
+import PageToast from './page-toast.vue'
+import PageDialog from './page-dialog.vue'
+import PageLogin from './page-login.vue'
+
 const store = useStore(store => store.app)
 
-const props = defineProps({
-    fullscreen: {
-        type: Boolean
-    },
-    tabbar: {
-        type: Boolean
-    }
-})
+const props = defineProps<{
+    fullscreen?: boolean
+    tabbar?: boolean
+}>()
 
 const containerStyle = computed(() => {
     const fullscreenStyle: StyleValue = props.fullscreen
         ? {
               position: 'absolute',
-              inset: 0
+              left: '0',
+              right: '0',
+              top: '0',
+              bottom: '0'
           }
         : {}
 
@@ -41,8 +45,5 @@ const containerStyle = computed(() => {
         : {}
 
     return Object.assign({}, fullscreenStyle, tabbarStyle)
-})
-
-onMounted(()=>{
 })
 </script>

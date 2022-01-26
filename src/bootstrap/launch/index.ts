@@ -1,8 +1,8 @@
 import getAppLaunchTasks from '../launch/app.launch'
 import getUserLaunchTasks from '../launch/user.launch'
 import qs from 'qs'
-import { useRequest } from 'virtual:http-request'
 
+const logger = useLogger()
 /**
  * 业务启动逻辑
  */
@@ -25,7 +25,11 @@ async function updateUserToken() {
  */
 async function updateUserData() {
     const store = useStore(store => store.user)
-    // TODO: 通过TOKEN更新用户数据
+
+    if (store.token) {
+        // TODO: 获取用户数据
+        return store.updateUserData()
+    }
 }
 
 /**
@@ -115,7 +119,7 @@ function weappCodeCheck(): Promise<boolean> {
 /**
  * 系统初始化
  */
-export default async function() {
+export default async function () {
     const store = useStore(store => store.app)
     // 检测系统启动状态
     if (store.ready) return

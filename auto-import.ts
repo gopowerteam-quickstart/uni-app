@@ -6,7 +6,13 @@ const imports: Array<ImportsMap | PresetName> = [
         '@/router': ['useRouter'],
         '@/store': ['useStore'],
         '@/shared/common': ['get', 'set'],
-        '@/shared/hooks': ['useInstance', 'useLogger'],
+        '@/shared/hooks': [
+            'useInstance',
+            'useLogger',
+            'useToast',
+            'useMedia',
+            'useUploader'
+        ],
         '@/shared/lifecycle': ['onPageLoad']
     }
 ]

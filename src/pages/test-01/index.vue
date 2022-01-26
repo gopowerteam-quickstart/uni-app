@@ -1,23 +1,9 @@
 <template lang="pug">
-PageContainer
-  view.content
-      image.logo(src='/static/logo.png')
-      view.text-area
-          text.text-red-500(@click="updateTitle") loading
+.loading(@click='router.back()') loading
 </template>
 
 <script setup lang="ts">
-const logger = useLogger()
 const router = useRouter()
-const title = ref('Hello')
-
-function updateTitle() {
-    logger.log(router.getParams())
-}
-
-onPageLoad((...a) => {
-    logger.log(router.getParams())
-})
 </script>
 
 <style>

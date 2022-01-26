@@ -1,4 +1,5 @@
 node_modules/**/*
+src/uni-modules/**/*
 
 scripts/**/*.js
 logger.service.ts

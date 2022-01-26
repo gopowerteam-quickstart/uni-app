@@ -1,1 +1,3 @@
-declare type RouterPages = "/pages/index/index" | "/pages/loading/index"
+declare type RouterPages =
+    | '/pages/index/index'
+    | '/pages/test-01/index'

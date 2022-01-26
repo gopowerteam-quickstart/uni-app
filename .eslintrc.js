@@ -16,6 +16,7 @@ module.exports = {
     rules: {
         quotes: [1, 'single'],
         'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-        'no-console': 1
+        'no-console': 1,
+        'vue/multi-word-component-names': 0
     }
 }

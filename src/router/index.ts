@@ -1,8 +1,12 @@
+import { events } from '@/config/event.config'
+import { useLogin } from '@/shared/hooks'
+import { onLoad, onUnload } from '@dcloudio/uni-app'
 import qs from 'qs'
+import { lastValueFrom } from 'rxjs'
+import type { ComponentInternalInstance } from 'vue'
 import { pages } from '../pages.json'
 
 const logger = useLogger()
-
 /**
  * 导航类型
  */
@@ -13,8 +17,9 @@ type navigateMode = 'push' | 'redirect' | 'relaunch'
  */
 interface navigateOptions {
     mode?: navigateMode
+    query?: { [key: string]: string | number }
     params?: { [key: string]: any }
-    events?: (...params: any[]) => void
+    events?: { [key: string]: (...params: any[]) => void }
 }
 
 /**
@@ -22,81 +27,224 @@ interface navigateOptions {
  */
 const defaultNavigateMode: navigateMode = 'push'
 
-/**
- * 验证页面权限
- * @param page
- * @returns
- */
-function validatePage(page) {
-    const store = useStore(store => store.user)
+class Router {
+    private readonly _instance: ComponentInternalInstance | null
+    private readonly _page
+    private eventChannel
 
-    if (page?.meta?.needLogin !== true) {
-        return
+    private routerParams: any[] = []
+
+    private get page() {
+        return this._page['$page']
     }
 
-    return !!store.current
-}
-/**
- * 路由导航
- * @param path
- * @param options
- * @returns
- */
-function navigateTo(path: RouterPages, options: navigateOptions = {}) {
-    const mode = options.mode ?? defaultNavigateMode
-    const page = pages.find(page => `/${page.path}` === path)
-
-    if (!page) {
-        logger.error(`页面不存在:${path}`)
-        return
+    private get instance() {
+        return this._instance
     }
 
-    if (validatePage(page) === false) {
-        // TODO 用户未登录处理
-        logger.warn('用户未登录')
-        return
+    public getRouterParams() {
+        return this.routerParams.pop() || {}
     }
 
-    // 获取路由行为
-    const navigateAction = {
-        push: uni.navigateTo,
-        redirect: uni.redirectTo,
-        relaunch: uni.reLaunch
-    }[mode]
+    private query: { [key: string]: string | number }
+    private params: { [key: string]: any }
 
-    // 获取路由参数
-    const navigateOption = Object.assign(
-        {
-            url: `${path}${
-                options.params
-                    ? qs.stringify(options.params, { addQueryPrefix: true })
-                    : ''
-            }`
-        },
-        mode === 'push' ? { events: options.events } : {}
-    )
+    constructor(instance: ComponentInternalInstance | null, page: any) {
+        this._instance = instance
+        this._page = page
 
-    // 触发页面导航
-    navigateAction(navigateOption)
+        this.onRouterInit()
+    }
+
+    private onRouterInit() {
+        const setQuery = query => {
+            if (this.page) {
+                this.page.query = query
+            }
+        }
+
+        const setParams = () => {
+            const [page, beforePage] = getCurrentPages().reverse()
+
+            if (beforePage) {
+                const params = routers.get(beforePage)?.getRouterParams()
+                this.params = params || {}
+            }
+            // const eventChannel = this.getOpenerEventChannel()
+
+            // if (eventChannel && eventChannel.once) {
+            //     this.eventChannel = eventChannel
+            //     eventChannel.once(events.router.params, params => {
+            //         this.params = params
+            //     })
+            // }
+        }
+
+        onLoad(query => {
+            setParams()
+            setQuery(query)
+        })
+    }
+
+    public getPath() {
+        return `/${get(this.page, 'route')}` as RouterPages
+    }
+
+    public getOpenerEventChannel() {
+        if (this.instance && this.instance.proxy) {
+            return this.instance.proxy.getOpenerEventChannel()
+        }
+    }
+
+    /**
+     * 验证页面权限
+     * @param page
+     * @returns
+     */
+    private validatePage(page) {
+        const store = useStore(store => store.user)
+
+        // 验证页面牧尘在需要登陆
+        if (page?.meta?.needLogin !== true) return
+
+        // 页面需要登陆
+        return !!store.current
+    }
+
+    private onNeedLogin() {
+        const login = useLogin()
+
+        return login.show()
+    }
+
+    /**
+     * 路由导航
+     * @param path
+     * @param options
+     * @returns
+     */
+    public async navigateTo(
+        path: RouterPages,
+        options: navigateOptions = {}
+    ): Promise<any> {
+        const mode = options.mode ?? defaultNavigateMode
+        const page = pages.find(page => `/${page.path}` === path)
+
+        if (!page) {
+            logger.error(`页面不存在:${path}`)
+            return Promise.reject()
+        }
+
+        if (this.validatePage(page) === false) {
+            await this.onNeedLogin()
+        }
+
+        this.routerParams.push(options.params)
+
+        // 获取路由行为
+        const navigateAction = {
+            push: uni.navigateTo,
+            redirect: uni.redirectTo,
+            relaunch: uni.reLaunch
+        }[mode]
+
+        const navigateUrl = `${path}${
+            options.query
+                ? qs.stringify(options.query, {
+                      addQueryPrefix: true,
+                      encode: false
+                  })
+                : ''
+        }`
+
+        return new Promise(resolve => {
+            // 获取路由参数
+            const navigateOption = Object.assign(
+                {
+                    url: navigateUrl
+                },
+                mode === 'push'
+                    ? {
+                          events: {
+                              ...(options.events || {}),
+
+                              [events.router.back]: data => {
+                                  resolve(data)
+                              }
+                          }
+                      }
+                    : {}
+            )
+
+            // 触发页面导航
+            navigateAction({
+                ...navigateOption
+            })
+        })
+    }
+
+    public back(option?: UniApp.NavigateBackOptions & { params? }) {
+        const { params, ...backOption } = option || {}
+
+        if (
+            this.instance &&
+            this.instance.proxy &&
+            option &&
+            params !== undefined
+        ) {
+            const { proxy } = this.instance
+
+            const eventChannel = proxy.getOpenerEventChannel()
+
+            eventChannel && eventChannel.emit(events.router.back, params)
+        }
+
+        uni.navigateBack(backOption)
+    }
+
+    /**
+     * 获取页面参数
+     * @returns
+     */
+    public getParams(key?: string) {
+        if (this.params) {
+            return key ? this.params[key] : this.params
+        }
+    }
+
+    public getQuery(key?: string) {
+        if (this.query) {
+            return key ? this.query[key] : this.query
+        }
+    }
 }
 
-/**
- * 获取页面参数
- * @returns
- */
-function getPageParams() {
-    const [page] = getCurrentPages().reverse()
-    const { fullPath } = page['$page']
-    const [_, query] = fullPath.split('?')
-
-    return qs.parse(query)
-}
+const routers = new WeakMap<any, Router>()
 
 export const useRouter = () => {
-    const router = {
-        navigateTo,
-        back: uni.navigateBack,
-        getParams: getPageParams
+    const instance = getCurrentInstance()
+    const [page] = getCurrentPages().reverse()
+    const cache = routers.get(page)
+
+    if (cache) {
+        return cache
     }
+
+    onUnload(() => {
+        routers.delete(page)
+    })
+
+    const router = new Router(instance, page)
+    routers.set(page, router)
+    // 处理页面传递数据
+
+    // const router = {
+    //     navigateTo: navigateTo(instance),
+    //     back: navigateBack(instance),
+    //     getParams: getPageParams(),
+    //     getQuery: getPageQuery(),
+    //     getPath: getPagePath,
+    //     getOpenerEventChannel: () => getEventChannel(instance)
+    // }
     return router
 }

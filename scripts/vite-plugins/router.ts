@@ -2,12 +2,14 @@ import fs from 'fs'
 import path from 'path'
 import hjson from 'hjson'
 // 默认定义文件名
-const DECLARATION_DIR = 'typings'
-const DECLARATION_FILE = 'router.d.ts'
 
-export default () => {
+type Option = {
+    dts: string
+}
+
+export default (option: Option) => {
     return {
-        name: 'vite-plugin--request',
+        name: 'vite-plugin-request-declare',
         enforce: 'pre',
         buildStart() {
             const json = fs.readFileSync(path.resolve('src/pages.json'), {
@@ -15,7 +17,8 @@ export default () => {
             })
 
             const { pages } = hjson.parse(json)
-            generatePagesDeclaration(pages)
+
+            generatePagesDeclaration(pages, option.dts)
         }
     }
 }
@@ -23,14 +26,9 @@ export default () => {
 /**
  * 生成定义文件
  */
-function generatePagesDeclaration(pages) {
-    const declaration = `declare type RouterPages = ${pages
-        .map(x => '"/' + x.path + '"')
-        .join(' | ')}`
+function generatePagesDeclaration(pages, dts) {
+    const declaration = `declare type RouterPages =
+    ${pages.map(x => `| \'/${x.path}\'\n`).join('    ')}`
 
-    fs.writeFileSync(
-        path.resolve(`${DECLARATION_DIR}/${DECLARATION_FILE}`),
-        declaration,
-        'utf-8'
-    )
+    fs.writeFileSync(path.resolve(dts), declaration, 'utf-8')
 }

@@ -5,7 +5,8 @@ export const appConfig = {
     wechat: {
         appid: import.meta.env.VITE_APP_WECHAT_APPID as string
     },
-    qiniu: {
-        region: 'SCN'
+    storage: {
+        qiniu: {},
+        cos: {}
     }
 } as const
