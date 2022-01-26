@@ -10,10 +10,10 @@ export default {
         bootstrap()
     },
     onShow: () => {
-        logger.log('App Show')
+        logger.info('App Show')
     },
     onHide: () => {
-        logger.log('App Hide')
+        logger.info('App Hide')
     }
 }
 </script>

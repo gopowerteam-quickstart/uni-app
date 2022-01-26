@@ -16,7 +16,7 @@ function onTestRouter() {
 }
 
 onPageLoad(() => {
-    logger.log('页面启动')
+    logger.info('页面启动')
 })
 </script>
 

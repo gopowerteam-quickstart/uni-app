@@ -1,7 +1,5 @@
 import type { Ref } from 'vue'
 
-const logger = useLogger()
-
 type SetOption = {
     update: boolean
 }
@@ -48,7 +46,10 @@ export function set<T>(
             .then(result => {
                 updateValue(result)
             })
-            .catch(logger.error)
+            .catch(err => {
+                const logger = useLogger()
+                logger.error(err)
+            })
     } else {
         updateValue(value)
     }

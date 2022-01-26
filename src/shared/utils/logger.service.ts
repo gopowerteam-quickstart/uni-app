@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 export enum LogType {
-    log = 1,
+    info = 1,
     warn = 2,
     error = 3
 }
@@ -12,7 +12,7 @@ export interface LogConfig {
 }
 
 const LoggerMapper = {
-    [LogType.log]: {
+    [LogType.info]: {
         name: '调试',
         styles: {
             type: 'color:#17cf67;',
@@ -88,8 +88,8 @@ export class LoggerService {
         LoggerService.systemInfo = uni.getSystemInfoSync()
     }
 
-    @LogProvider(LogType.log)
-    public log(...message: any[]) {}
+    @LogProvider(LogType.info)
+    public info(...message: any[]) {}
 
     @LogProvider(LogType.warn)
     public warn(...message: any[]) {}
