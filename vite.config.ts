@@ -12,7 +12,7 @@ import svg from './scripts/vite-plugins/svg-icon'
 export default defineConfig({
     resolve: {
         alias: {
-            '@/': `${resolve(__dirname, 'src')}/`
+            '@': `${resolve(__dirname, 'src')}`
         }
     },
     plugins: [
@@ -33,10 +33,9 @@ export default defineConfig({
             dts: 'typings/component.d.ts'
         }),
         request({
-            root: resolve(process.cwd(), 'src'),
             alias: '@',
-            serviceDir: 'http/services',
-            serviceDeclaration: 'typings/request.d.ts'
+            dir: 'src/http/services',
+            dts: 'typings/request.d.ts'
         }),
         autoImport({
             dts: 'typings/auto-imports.d.ts',

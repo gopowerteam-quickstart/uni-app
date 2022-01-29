@@ -19,10 +19,9 @@ type service = {
 }
 
 type Option = {
-    root: string
     alias: string
-    serviceDir: string
-    serviceDeclaration: string
+    dir: string
+    dts: string
 }
 
 export default (option: Option): Plugin => {
@@ -47,10 +46,7 @@ export default (option: Option): Plugin => {
             }
 
             if (generatedServices) {
-                generateDeclaration(
-                    generatedServices,
-                    option.serviceDeclaration
-                )
+                generateDeclaration(generatedServices, option.dts)
                 return generateCode(generatedServices)
             }
         }
@@ -78,11 +74,17 @@ function generateServicePaths(option: Option) {
             }
         })
     }
-    if (fs.existsSync(path.resolve(option.serviceDir))) {
-        walk(path.resolve(option.root, option.serviceDir))
+
+    const { replacement } = viteConfig.resolve.alias.find(
+        alias => alias.find === option.alias
+    )
+
+    if (fs.existsSync(path.resolve(option.dir))) {
+        walk(path.resolve(option.dir))
     }
+
     return servicePaths.map(servicePath =>
-        servicePath.replace(option.root.replace(/\\/g, '/'), option.alias)
+        servicePath.replace(replacement.replace(/\\/g, '/'), option.alias)
     )
 }
 
