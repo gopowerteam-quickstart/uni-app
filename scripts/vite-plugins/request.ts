@@ -81,7 +81,6 @@ function generateServicePaths(option: Option) {
     if (fs.existsSync(path.resolve(option.serviceDir))) {
         walk(path.resolve(option.root, option.serviceDir))
     }
-
     return servicePaths.map(servicePath =>
         servicePath.replace(option.root.replace(/\\/g, '/'), option.alias)
     )
@@ -140,7 +139,7 @@ export function useRequest(
  * @param placeholder
  * @returns
  */
-function generateImportCode(services: service[], placeholder = '      ') {
+function generateImportCode(services: service[], placeholder = '') {
     const getImportName = (service: service) =>
         service.group
             ? `${service.name} as ${service.group}_${service.name}`
@@ -153,7 +152,7 @@ function generateImportCode(services: service[], placeholder = '      ') {
                     service
                 )} } from '${service.path.replace(/\.ts$/g, '')}'`
         )
-        .join(`\n${placeholder}`)
+        .join(`\r\n${placeholder}`)
 }
 
 /**
@@ -166,7 +165,7 @@ function generateServiceCode(services: service[], placeholder = '') {
     const generateServices = (items: any, placeholder: string) => {
         return `${Object.entries(items)
             .map(([key, name]) => `${key}:${name}`)
-            .join(`,\n${placeholder}`)}`
+            .join(`,\r\n${placeholder}`)}`
     }
 
     const generateGroups = () => {
@@ -182,7 +181,7 @@ function generateServiceCode(services: service[], placeholder = '') {
           ${generateServices(items, ' '.repeat(10))}
       }`
             )
-            .join(',\n      ')} `
+            .join(',\r\n      ')} `
     }
 
     if (services.some(service => !!service.group)) {
@@ -191,7 +190,7 @@ function generateServiceCode(services: service[], placeholder = '') {
   }`
     } else {
         return `const serviceMap = {
-        ${services.map(service => service.name).join(',\n        ')}
+      ${services.map(service => service.name).join(`,\r\n${placeholder}`)}
     }`
     }
 }
@@ -200,17 +199,17 @@ function generateServiceCode(services: service[], placeholder = '') {
  * 生成定义文件
  */
 function generateDeclaration(services: service[], serviceDeclaration: string) {
-    const importCode = generateImportCode(services, '    ')
+    const importCode = generateImportCode(services, '  ')
     const serviceCode = generateServiceCode(services, '    ')
 
     const declaration = `declare module '${MODULE_ID}' {
-    ${importCode}
+  ${importCode}
 
-    ${serviceCode}
+  ${serviceCode}
 
-    export function useRequest<T>(
-        select: (services: typeof serviceMap) => { new (): T }
-    ): T
+  export function useRequest<T>(
+    select: (services: typeof serviceMap) => { new (): T }
+  ): T
 }
 `
 

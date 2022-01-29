@@ -38,7 +38,7 @@ export class RequestOption {
             )
 
         return {
-            url: `${this.getRequestGateway()}${
+            url: `${this.getRequestGateway().replace(/\/$/, '')}/${
                 RequestService.getRequestUrl
                     ? RequestService.getRequestUrl(this)
                     : this.getRequestUrl()

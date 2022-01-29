@@ -6,7 +6,7 @@ export const appConfig = {
         appid: import.meta.env.VITE_APP_WECHAT_APPID as string
     },
     storage: {
-        qiniu: {},
-        cos: {}
-    }
+        public: 'cos',
+        private: 'cos'
+    } as const
 } as const

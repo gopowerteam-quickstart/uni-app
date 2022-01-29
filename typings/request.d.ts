@@ -1,11 +1,11 @@
 declare module 'virtual:http-request' {
-    
+  
 
-    const serviceMap = {
-        
+  const serviceMap = {
+      
     }
 
-    export function useRequest<T>(
-        select: (services: typeof serviceMap) => { new (): T }
-    ): T
+  export function useRequest<T>(
+    select: (services: typeof serviceMap) => { new (): T }
+  ): T
 }

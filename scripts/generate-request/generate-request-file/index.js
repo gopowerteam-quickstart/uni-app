@@ -9,16 +9,16 @@ const rimraf = require('rimraf')
 const configJson = loadConfig()
 
 // 扩展模版命令toUpperCase
-Handlebars.registerHelper('toUpperCase', function(str) {
+Handlebars.registerHelper('toUpperCase', function (str) {
     return str.toUpperCase()
 })
 
 // 扩展模版命令toLowerCase
-Handlebars.registerHelper('toLowerCase', function(str) {
+Handlebars.registerHelper('toLowerCase', function (str) {
     return str.toLowerCase()
 })
 
-Handlebars.registerHelper('replace', function(context, findStr, replaceStr) {
+Handlebars.registerHelper('replace', function (context, findStr, replaceStr) {
     return context.replace(findStr, replaceStr)
 })
 /**
@@ -62,14 +62,12 @@ function generateService(config) {
  * 获取控制器名称
  */
 function getControllerName(currentTag) {
-    const [tag] = currentTag
-    const { name: className } = configJson.tags.find(x => x.tag === tag)
-
-    if (!className) {
-        throw new Error(`路径:${currentTag}不符合规范`)
-    }
-
-    return className.replace(/^\S/, s => s.toUpperCase())
+    return (
+        ([tag] = currentTag),
+        ({ description } = tags.find(x => x.name === tag)),
+        description.replace(/\s/g, '').replace(/Controller$/g, '')
+        // .replace(/^\S/, s => s.toLowerCase())
+    )
 }
 
 /**
@@ -134,13 +132,13 @@ function createControllers(service, controllers, paths, tags) {
             Object.entries(config).forEach(
                 ([
                     method,
-                    { summary, description, tags: currentTag, responses }
+                    { summary, description, tags: currentTag, operationId }
                 ]) => {
                     const getController = service.config.controllerResolver
                         ? service.config.controllerResolver
                         : getControllerName
 
-                    const controllerName = getController(currentTag)
+                    const controllerName = getController(path, currentTag, tags)
 
                     const aliasName = getAliasName(
                         service.config,
@@ -149,7 +147,8 @@ function createControllers(service, controllers, paths, tags) {
                     )
 
                     const controller = aliasName || controllerName
-                    const action = getActionName(path, method, config)
+                    // const action = getActionName(path, method, config)
+                    const action = operationId
 
                     if (action.startsWith('http:')) {
                         return

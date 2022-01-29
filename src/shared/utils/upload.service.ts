@@ -1,7 +1,8 @@
 import { nanoid } from 'nanoid/non-secure'
 import { appConfig } from '@/config/app.config'
-
-export type StorageType = 'image' | 'video'
+import { useRequest } from 'virtual:http-request'
+import { RequestParams } from '@/http/core'
+import { lastValueFrom } from 'rxjs'
 
 export type ChooseFilesResult =
     | UniApp.ChooseImageSuccessCallbackResultFile
@@ -90,14 +91,14 @@ export class UploadTask {
  * 公共函数
  */
 export class QiniuStorageService implements IStorageService {
-    private store = useStore(store => store.app)
+    // private store = useStore(store => store.app)
 
     private readonly name: string
     private token: string
 
     // TODO: 修正域名操作
-    private readonly domain: string = this.store.basis.conf.temp_domain
-    private readonly uploadUrl: string = this.store.basis.conf.upload_domain
+    private readonly domain: string
+    private readonly uploadUrl: string
 
     constructor(name) {
         this.name = name
@@ -147,10 +148,73 @@ export class QiniuStorageService implements IStorageService {
 }
 
 /**
+ * 公共函数
+ */
+export class CosStorageService implements IStorageService {
+    private readonly name: string
+
+    // private storageService = useRequest(
+    //     ({ FrontendService }) => FrontendService.StorageService
+    // )
+    constructor(name) {
+        this.name = name
+    }
+
+    /**
+     * 获取上传签名
+     * @param uploadTask
+     */
+    // private requestSignature(key: string) {
+    //     return lastValueFrom(
+    //         this.storageService.getStorageSignature(
+    //             new RequestParams({
+    //                 append: {
+    //                     storage: this.name,
+    //                     key
+    //                 }
+    //             })
+    //         )
+    //     )
+    // }
+
+    /**
+     * 文件上传
+     * @param fileObject
+     */
+    public async putObject(uploadTask: UploadTask) {
+        const logger = useLogger()
+        // TODO
+        // const { host, signature } = await this.requestSignature(uploadTask.key)
+
+        // uni.uploadFile({
+        //     url: host,
+        //     name: 'file',
+        //     // #ifdef H5
+        //     file: uploadTask.file as File,
+        //     // #endif
+        //     // #ifdef MP-WEIXIN || APP-PLUS
+        //     filePath: uploadTask.path,
+        //     // #endif
+        //     formData: {
+        //         ...signature,
+        //         success_action_status: 200
+        //     },
+        //     success: () => {
+        //         uploadTask.done(`${host}/${uploadTask.key}`)
+        //     },
+        //     fail: error => {
+        //         logger.error('上传失败', error)
+        //         uploadTask.abort()
+        //     }
+        // }).onProgressUpdate(res => uploadTask.updateProgress(res))
+    }
+}
+
+/**
  * 文件服务
  */
 export class UploaderService {
-    private readonly name: StorageType
+    private readonly name: keyof typeof appConfig.storage
 
     private static storages: {
         [key: string]: IStorageService
@@ -160,7 +224,7 @@ export class UploaderService {
         return UploaderService.storages[this.name]
     }
 
-    constructor(name: StorageType) {
+    constructor(name: keyof typeof appConfig.storage) {
         this.name = name
 
         if (!UploaderService.storages[name]) {
@@ -208,7 +272,22 @@ export class UploaderService {
      * @param name
      */
     private createStroageService(name: string) {
-        // 使用七牛作为存储服务
-        UploaderService.storages[name] = new QiniuStorageService(name)
+        const getStorageInstance = () => {
+            switch (appConfig.storage[name]) {
+                case 'cos':
+                    return new CosStorageService(name)
+                // case 'qiniu':
+                //     return new QiniuStorageService(name)
+            }
+
+            // 使用七牛作为存储服务
+            // UploaderService.storages[name] = new QiniuStorageService(name)
+        }
+
+        const storageInstance = getStorageInstance()
+
+        if (storageInstance) {
+            UploaderService.storages[name] = storageInstance
+        }
     }
 }

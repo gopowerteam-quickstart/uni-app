@@ -8,7 +8,6 @@ import router from './scripts/vite-plugins/router'
 import component from './scripts/vite-plugins/component'
 import autoImport from 'unplugin-auto-import/vite'
 import svg from './scripts/vite-plugins/svg-icon'
-
 // https://vitejs.dev/config/
 export default defineConfig({
     resolve: {

@@ -9,10 +9,18 @@ import HelloWorld from './components/hello-world.vue'
 
 const logger = useLogger()
 const router = useRouter()
+const media = useMedia()
+const uploader = useUploader('public')
 // const logger = useLogger()
 
 function onTestRouter() {
-    router.navigateTo('/pages/test-01/index')
+    // router.navigateTo('/pages/test-01/index')
+    // media.chooseMedia({ type: 'image' }).then(data => {
+    //     const tasks = uploader.upload(data)
+    //     tasks.forEach(x => {
+    //         x.onComplete(a => console.log(x.url))
+    //     })
+    // })
 }
 
 onPageLoad(() => {

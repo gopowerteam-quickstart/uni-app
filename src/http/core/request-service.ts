@@ -100,6 +100,7 @@ export class RequestService {
     public send(requestOption: RequestOption): Promise<any> {
         // 获取配置对象
         const options = requestOption.getOptions()
+
         // 发送通讯请求
         return new Promise((resolve, reject) => {
             uni.request({

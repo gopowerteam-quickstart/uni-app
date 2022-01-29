@@ -5,8 +5,8 @@ export class TokenService extends ExtendService {
         const store = useStore(store => store.user)
 
         if (store.token) {
-            params.options.header = params.options.header || {}
-            params.options.header['Authorization'] = `Bearer ${store.token}`
+            // params.options.header = params.options.header || {}
+            // params.options.header['Authorization'] = `Bearer ${store.token}`
         }
     }
 }
