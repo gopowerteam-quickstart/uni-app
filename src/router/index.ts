@@ -58,6 +58,8 @@ class Router {
 
     private onRouterInit() {
         const setQuery = query => {
+            this.query = query
+
             if (this.page) {
                 this.page.query = query
             }
