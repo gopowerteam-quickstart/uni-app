@@ -2,6 +2,14 @@
 PageContainer
     HelloWorld
     view.text.font-bold.text-center.m-10(@click='onTestRouter') There is Page Content
+    SvgIcon(
+        :textGap='2'
+        name='weibo'
+        size='80'
+        text='123123123123'
+        text-position='bottom'
+        textColor='red'
+    )
 </template>
 
 <script setup lang="ts">

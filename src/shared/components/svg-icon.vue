@@ -13,6 +13,8 @@ interface Props {
     size?: number | string
     text?: string
     textSize?: number | string
+    textColor?: string
+    textGap?: number
     textPosition?: 'right' | 'bottom'
     color?: string
 }
@@ -34,7 +36,9 @@ const iconData = computed(() => {
 const props = withDefaults(defineProps<Props>(), {
     size: 50,
     textSize: 30,
-    textPosition: 'right'
+    textColor: '#000',
+    textPosition: 'right',
+    textGap: 2
 })
 
 const iconSize = computed(() => {
@@ -64,7 +68,8 @@ const imageStyle = computed(() =>
 )
 
 const textStyle = computed(() => ({
-    'font-size': `${uni.upx2px(parseInt(props.textSize.toString()))}px`
+    'font-size': `${uni.upx2px(parseInt(props.textSize.toString()))}px`,
+    color: props.textColor
 }))
 
 const containerClass = computed(() => ({
@@ -72,14 +77,12 @@ const containerClass = computed(() => ({
     'flex-row': props.textPosition === 'right',
     'flex-col': props.textPosition === 'bottom',
     'justify-center': true,
-    'items-center': true
+    'items-center': true,
+    [`flex-gap-${props.textGap}`]: true
 }))
 </script>
 
 <style lang="scss" scoped>
-.svg-icon {
-    gap: 5rpx;
-}
 .icon {
     display: block;
 }
