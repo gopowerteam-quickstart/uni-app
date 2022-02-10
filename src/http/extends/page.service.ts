@@ -11,6 +11,7 @@ export class PageService extends ExtendService {
     public pageIndex = 0
     public total = 0
     public pageSizeOpts: string[] = []
+    public finished = false
 
     constructor(data?: any) {
         super()
@@ -40,8 +41,8 @@ export class PageService extends ExtendService {
         setData: (data: any) => void
     ) => {
         this.total = response.totalElements
-
         setData(response.content)
+        this.updateFinished()
     }
 
     public reset() {
@@ -53,5 +54,36 @@ export class PageService extends ExtendService {
         this.pageIndex = pageIndex
         this.pageSize = pageSize
         return Promise.resolve()
+    }
+
+    /**
+     * 分页完成状态
+     */
+    public updateFinished() {
+        const total = get(this.total)
+        const pageIndex = get(this.pageIndex)
+        const pageSize = get(this.pageSize)
+
+        const getFinished = () => {
+            if (total === 0) return true
+
+            if (total < pageIndex * pageSize) return true
+
+            return false
+        }
+        this.finished = getFinished()
+    }
+
+    /**
+     * 分页前进操作
+     * @param callback
+     */
+    public next(callback: any) {
+        if (!get(this.finished)) {
+            this.pageIndex = this.pageIndex + 1
+            callback(true)
+        } else {
+            callback(false)
+        }
     }
 }
