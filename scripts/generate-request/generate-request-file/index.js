@@ -132,7 +132,13 @@ function createControllers(service, controllers, paths, tags) {
             Object.entries(config).forEach(
                 ([
                     method,
-                    { summary, description, tags: currentTag, operationId }
+                    {
+                        summary,
+                        description,
+                        tags: currentTag,
+                        operationId,
+                        responses
+                    }
                 ]) => {
                     const getController = service.config.controllerResolver
                         ? service.config.controllerResolver
@@ -148,7 +154,7 @@ function createControllers(service, controllers, paths, tags) {
 
                     const controller = aliasName || controllerName
                     // const action = getActionName(path, method, config)
-                    const action = operationId
+                    const action = operationId.replace(/Using.*?$/, '')
 
                     if (action.startsWith('http:')) {
                         return
@@ -184,7 +190,7 @@ function createControllers(service, controllers, paths, tags) {
                         action: (action || method).replace(/-(\w)/g, ($, $1) =>
                             $1.toUpperCase()
                         ),
-                        schema: undefined,
+                        schema: getActionReponseShema(service, responses),
                         defaultAction: !action,
                         method: method.replace(/^\S/, s => s.toUpperCase()),
                         comment: summary ?? description
@@ -194,6 +200,34 @@ function createControllers(service, controllers, paths, tags) {
         })
 }
 
+function getActionReponseShema(service, responses) {
+    const response = responses['200']
+
+    if (!response || !response.schema || !service.config.model) {
+        return
+    }
+
+    const { schema } = response
+
+    return getPropertyType(schema)
+}
+
+function getPropertyType(schema) {
+    switch (true) {
+        case !!schema.originalRef:
+            if (schema.originalRef.startsWith('Map«')) return
+
+            return schema.originalRef
+                .replace(/^Page«/, '')
+                .replace(/^Iterable«/, '')
+                .replace(/»$/, '[]')
+
+        case schema.type === 'array':
+            const type = getPropertyType(schema.items)
+            return type && `${type}[]`
+    }
+}
+
 /**
  * 生成配置文件
  * @param service
@@ -201,7 +235,7 @@ function createControllers(service, controllers, paths, tags) {
 function generate(service) {
     fetch(service.url, { method: 'GET' })
         .then(res => res.json()) // expecting a json response
-        .then(({ tags, paths, components }) => {
+        .then(({ tags, paths, definitions }) => {
             info('-------------------------')
             info('服务名称', service.name || '无')
             info('服务路径', service.url)
@@ -216,7 +250,7 @@ function generate(service) {
             generateServiceFiles(service, controllers)
 
             if (configJson.model) {
-                generateModelFiles(service, components)
+                generateModelFiles(service, definitions)
             }
         })
 }
