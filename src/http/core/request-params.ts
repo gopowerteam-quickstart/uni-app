@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import { RequestService } from './request-service'
 import { ExtendService } from './extend-service'
 import { instanceToPlain } from 'class-transformer'
-import { Model } from './request-modal'
+import { Model } from './request-model'
 /**
  * 请求参数对象
  */
