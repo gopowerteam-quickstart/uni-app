@@ -4,6 +4,7 @@ import { RequestOption } from './request-option'
 import { IRequestServerConfig } from './interfaces'
 import { RequestState } from './enums'
 import { RequestService } from './request-service'
+import { plainToInstance } from 'class-transformer'
 
 /**
  * 请求对象
@@ -89,7 +90,12 @@ export class RequestObject {
                         )
 
                     // 合并数据
-                    const data = afterData || beforeData
+                    let data = afterData || beforeData
+
+                    // 数据模型
+                    if (this.responseModel) {
+                        data = plainToInstance(this.responseModel, data)
+                    }
 
                     // 通讯结果正常
                     this.requestObserver.next(data)

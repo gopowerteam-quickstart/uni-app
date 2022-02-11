@@ -59,6 +59,7 @@
         "@dcloudio/uni-mp-weixin": "3.0.0-alpha-3031020220124001",
         "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-3031020220124001",
         "@vueuse/core": "7.5.5",
+        "class-transformer": "^0.5.1",
         "dayjs": "1.10.7",
         "pinia": "2.0.9",
         "qiniu-js": "3.4.0",
