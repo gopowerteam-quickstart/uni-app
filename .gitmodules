@@ -1,0 +1,3 @@
+[submodule "src/uni-modules/firstui"]
+	path = src/uni-modules/firstui
+	url = git@github.com:gopowerteam/uniapp.firstui.git
