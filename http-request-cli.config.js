@@ -1,6 +1,6 @@
 module.exports = {
     name: 'default',
-    gateway: 'http://gateway.local.xbt-dev.top/',
+    gateway: '',
     swagger: 'v2/api-docs',
     model: true,
     modelDir: {
@@ -15,9 +15,7 @@ module.exports = {
         alias: '@/http/services', // 服务目录名别
         path: './src/http/services' // 服务目录名别
     },
-    services: {
-        'frontend-service': 'xbt-platform-frontend-service'
-    },
+    services: {},
     controllerResolver: (_, currentTag, tags) => (
         ([tag] = currentTag),
         ({ description } = tags.find(x => x.name === tag)),
