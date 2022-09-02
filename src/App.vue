@@ -18,11 +18,6 @@ export default {
 }
 </script>
 
-<style>
-@tailwind components;
-@tailwind utilities;
-</style>
-
 <style lang="scss">
 @import '@/assets/styles/default.scss';
 @import '@/assets/styles/common.scss';
