@@ -1,10 +1,8 @@
-<template lang="pug">
-view.loading(@click='router.back()') loading
+<template>
+  <view class="loading" @click="router.back()">
+    loading
+  </view>
 </template>
-
-<script setup lang="ts">
-const router = useRouter()
-</script>
 
 <style>
 .content {
@@ -33,3 +31,7 @@ const router = useRouter()
     color: #8f8f94;
 }
 </style>
+
+<script setup lang="ts">
+const router = useRouter()
+</script>

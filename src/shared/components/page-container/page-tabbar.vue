@@ -1,48 +1,19 @@
-<template lang="pug">
-.tabbar-container.fixed.flex
-    view.tab.flex-auto.flex.flex-center.flex-col(
-        :class='{ "mid-button": tab.midButton }'
-        :key='tab.pagePath'
-        @click='() => onSelectTab(tab)'
-        v-for='tab in tabbars'
-    )
-        image.icon.py-1(
-            :src='currentPath === tab.pagePath ? tab.selectedIconPath : tab.iconPath'
-            mode='widthFix'
-        )
-        .text(v-if='tab.text') {{ tab.text }}
+<template>
+  <div class="tabbar-container fixed flex">
+    <view
+      v-for="tab in tabbars"
+      :key="tab.pagePath"
+      class="tab flex-auto flex flex-center flex-col"
+      :class="{ 'mid-button': tab.midButton }"
+      @click="() => onSelectTab(tab)"
+    >
+      <image class="icon py-1" mode="widthFix" :src="currentPath === tab.pagePath ? tab.selectedIconPath : tab.iconPath" />
+      <div v-if="tab.text" class="text">
+        {{ tab.text }}
+      </div>
+    </view>
+  </div>
 </template>
-
-<script setup lang="ts">
-import { onHide } from '@dcloudio/uni-app'
-
-const router = useRouter()
-const currentPath = ref('')
-
-const tabbars: {
-    text: boolean
-    pagePath: string
-    iconPath: string
-    selectedIconPath: string
-    midButton: boolean
-}[] = []
-
-function onSelectTab(tab) {
-    if (tab.midButton) {
-        // TODO
-    } else {
-        uni.switchTab({ url: tab.pagePath })
-    }
-}
-
-onMounted(() => {
-    set(currentPath, router.getPath())
-})
-
-onHide(() => {
-    // TODO
-})
-</script>
 
 <style lang="scss" scoped>
 .tabbar-container {
@@ -69,3 +40,35 @@ onHide(() => {
     }
 }
 </style>
+
+<script setup lang="ts">
+import { onHide } from '@dcloudio/uni-app'
+
+const router = useRouter()
+const currentPath = ref('')
+
+const tabbars: {
+  text: boolean
+  pagePath: string
+  iconPath: string
+  selectedIconPath: string
+  midButton: boolean
+}[] = []
+
+function onSelectTab(tab) {
+  if (tab.midButton) {
+    // TODO
+  }
+  else {
+    uni.switchTab({ url: tab.pagePath })
+  }
+}
+
+onMounted(() => {
+  set(currentPath, router.getPath())
+})
+
+onHide(() => {
+  // TODO
+})
+</script>

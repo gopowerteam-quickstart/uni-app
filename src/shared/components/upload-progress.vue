@@ -1,23 +1,18 @@
-<template lang="pug">
-.upload-progress.h-full.w-full.relative
-    fui-animation(
-        :animationType='["fade"]'
-        :duration='100'
-        :show='!value.completed'
-        style='position: absolute; inset: 0'
-    )
-        .progress.flex.flex-center {{ value.progress }}%
-
-    slot
+<template>
+  <div class="upload-progress h-full w-full relative">
+    <fui-animation
+      :animation-type="['fade']"
+      :duration="100"
+      :show="!value.completed"
+      style="position: absolute; inset: 0"
+    >
+      <div class="progress flex flex-center">
+        {{ value.progress }}%
+      </div>
+    </fui-animation>
+    <slot />
+  </div>
 </template>
-
-<script setup lang="ts">
-import { UploadTask } from '../utils/upload.service'
-
-defineProps<{
-    value: UploadTask
-}>()
-</script>
 
 <style lang="scss" scoped>
 .progress {
@@ -35,3 +30,11 @@ defineProps<{
     color: #fff;
 }
 </style>
+
+<script setup lang="ts">
+import type { UploadTask } from '../utils/upload.service'
+
+defineProps<{
+  value: UploadTask
+}>()
+</script>

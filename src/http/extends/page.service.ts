@@ -1,89 +1,95 @@
-import { ExtendService, RequestParams } from '@/http/core'
+import type {
+  AdapterResponse,
+  RequestPlugin,
+  RequestSendOptions,
+} from '@gopowerteam/request'
 
-export class PageService extends ExtendService {
-    public default = {
-        pageSize: 10,
-        pageIndex: 1,
-        total: 0,
-        pageSizeOpts: ['10', '20', '50', '100']
+export class PageService implements RequestPlugin {
+  data = reactive({
+    index: 1,
+    size: 20,
+    total: 0,
+  })
+
+  get pageIndex() {
+    return this.data.index
+  }
+
+  set pageIndex(value: number) {
+    this.data.index = value
+  }
+
+  get pageSize() {
+    return this.data.size
+  }
+
+  set pageSize(value: number) {
+    this.data.size = value
+  }
+
+  get total() {
+    return this.data.total
+  }
+
+  set total(value: number) {
+    this.data.total = value
+  }
+
+  pageSizeOpts: number[] = [10, 20, 30, 40, 50]
+  pageLayouts: (
+    | 'PrevJump'
+    | 'PrevPage'
+    | 'JumpNumber'
+    | 'NextPage'
+    | 'NextJump'
+    | 'Sizes'
+    | 'FullJump'
+    | 'Total'
+  )[] = [
+      'PrevJump',
+      'PrevPage',
+      'JumpNumber',
+      'NextPage',
+      'NextJump',
+      'Sizes',
+      'FullJump',
+      'Total',
+    ]
+
+  /**
+   * 构造函数
+   * @param index
+   * @param size
+   */
+  constructor(index = 1, size = 20) {
+    this.pageIndex = index
+    this.pageSize = size
+  }
+
+  /**
+   * 重置操作
+   */
+  reset(): void {
+    this.pageIndex = 1
+  }
+
+  /**
+   * 前置操作
+   * @param options
+   */
+  before(options: RequestSendOptions) {
+    options.paramsQuery = {
+      ...options.paramsQuery,
+      page: this.pageIndex - 1,
+      size: this.pageSize,
     }
-    public pageSize = 0
-    public pageIndex = 0
-    public total = 0
-    public pageSizeOpts: string[] = []
-    public finished = false
+  }
 
-    constructor(data?: any) {
-        super()
-
-        if (data) this.default = { ...this.default, ...data }
-
-        this.pageSize = this.default.pageSize
-        this.pageIndex = this.default.pageIndex || 1
-        this.total = this.default.total
-        this.pageSizeOpts = this.default.pageSizeOpts
-    }
-
-    public before = (params: RequestParams) => {
-        params.setOptions({
-            ...(params.getOptions() || {}),
-            urlParams: {
-                ...params.getOptions('urlParams'),
-                size: this.pageSize,
-                page: this.pageIndex - 1
-            }
-        })
-    }
-
-    public after = (
-        response: any,
-        params: RequestParams,
-        setData: (data: any) => void
-    ) => {
-        this.total = response.totalElements
-        setData(response.content)
-        this.updateFinished()
-    }
-
-    public reset() {
-        this.pageIndex = this.default.pageIndex
-        this.pageSize = this.default.pageSize
-    }
-
-    public update(pageIndex: number, pageSize: number) {
-        this.pageIndex = pageIndex
-        this.pageSize = pageSize
-        return Promise.resolve()
-    }
-
-    /**
-     * 分页完成状态
-     */
-    public updateFinished() {
-        const total = get(this.total)
-        const pageIndex = get(this.pageIndex)
-        const pageSize = get(this.pageSize)
-
-        const getFinished = () => {
-            if (total === 0) return true
-
-            if (total < pageIndex * pageSize) return true
-
-            return false
-        }
-        this.finished = getFinished()
-    }
-
-    /**
-     * 分页前进操作
-     * @param callback
-     */
-    public next(callback: any) {
-        if (!get(this.finished)) {
-            this.pageIndex = this.pageIndex + 1
-            callback(true)
-        } else {
-            callback(false)
-        }
-    }
+  /**
+   * 后置操作
+   * @param response
+   */
+  after(response: AdapterResponse) {
+    this.total = response.data?.totalElements
+  }
 }

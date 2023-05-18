@@ -4,9 +4,11 @@
         "custom": {
             "^fui-(.*)": "@/uni-modules/firstui/fui-$1/fui-$1.vue",
             "^PageContainer": "@/shared/components/page-container/page-container.vue",
-            "^UploadGallery": "@/shared/components/upload-gallery.vue",
+            "^MediaGallery": "@/shared/components/media-gallery.vue",
             "^UploadProgress": "@/shared/components/upload-progress.vue",
-            "^SvgIcon": "@/shared/components/svg-icon.vue"
+            "^SvgIcon": "@/shared/components/svg-icon.vue",
+            "^ImagePreview": "@/shared/components/image-preview.vue",
+            "^SafeAreaBottom": "@/shared/components/safe-area-bottom.vue"
         }
     },
     "pages": [

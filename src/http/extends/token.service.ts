@@ -1,12 +1,16 @@
-import { ExtendService } from '@/http/core'
+import type { RequestPlugin, RequestSendOptions } from '@gopowerteam/request'
 
-export class TokenService extends ExtendService {
-    public before = (params: any) => {
-        const store = useStore(store => store.user)
+export class TokenService implements RequestPlugin {
+  public before = (options: RequestSendOptions) => {
+    const store = useStore(store => store.user)
 
-        if (store.token) {
-            // params.options.header = params.options.header || {}
-            // params.options.header['Authorization'] = `Bearer ${store.token}`
-        }
+    const token = store.accessToken
+
+    if (token) {
+      options.headers = {
+        Authorization: `Bearer ${token}`,
+        ...(options.headers || {}),
+      }
     }
+  }
 }

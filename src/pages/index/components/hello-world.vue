@@ -1,7 +1,9 @@
-<template lang="pug">
-.content Hello World
+<template>
+  <div class="content">
+    Hello World
+  </div>
 </template>
 
-<script setup lang="'ts"></script>
-
 <style lang="scss" scoped></style>
+
+<script setup lang="'ts"></script>

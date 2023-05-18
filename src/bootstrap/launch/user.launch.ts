@@ -3,5 +3,5 @@
  * @returns
  */
 export default function userLaunch() {
-    return []
+  return []
 }

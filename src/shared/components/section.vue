@@ -1,31 +1,18 @@
-<template lang="pug">
-.page-section
-    .page-section__head(v-if='type')
-        .page-section__head-tag(:class='type')
-    .page-section__content
-        text.page-section__content-title(:class='{ distraction: !subTitle }') {{ title }}
-        text.page-section__content-sub(
-            :class='{ distraction: !subTitle }'
-            v-if='subTitle'
-        ) {{ subTitle }}
+<template>
+  <div class="page-section">
+    <div v-if="type" class="page-section__head">
+      <div class="page-section__head-tag" :class="type" />
+    </div>
+    <div class="page-section__content">
+      <text class="page-section__content-title" :class="{ distraction: !subTitle }">
+        {{ title }}
+      </text>
+      <text v-if="subTitle" class="page-section__content-sub" :class="{ distraction: !subTitle }">
+        {{ subTitle }}
+      </text>
+    </div>
+  </div>
 </template>
-
-<script setup lang="ts">
-defineProps({
-    type: {
-        type: String,
-        default: 'line'
-    },
-    title: {
-        type: String,
-        default: ''
-    },
-    subTitle: {
-        type: String,
-        default: ''
-    }
-})
-</script>
 
 <style scoped>
 .page-section {
@@ -94,3 +81,20 @@ defineProps({
     color: #999;
 }
 </style>
+
+<script setup lang="ts">
+defineProps({
+  type: {
+    type: String,
+    default: 'line',
+  },
+  title: {
+    type: String,
+    default: '',
+  },
+  subTitle: {
+    type: String,
+    default: '',
+  },
+})
+</script>
