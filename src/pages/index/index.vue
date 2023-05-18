@@ -22,6 +22,7 @@
 import HelloWorld from './components/hello-world.vue'
 
 const logger = useLogger()
+
 // const logger = useLogger()
 
 function onTestRouter() {

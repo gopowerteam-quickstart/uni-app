@@ -11,8 +11,8 @@ export enum MediaSourceType {
 }
 
 export enum MediaType {
-  image = 'IMAGE',
-  video = 'VIDEO',
+  image = 'image',
+  video = 'video',
 }
 
 export enum BannerType {

@@ -1,5 +1,4 @@
-import { UploaderService } from '../utils/upload.service'
-import type { appConfig } from '@/config/app.config'
+import { UploadService } from '../utils/upload.service'
 
-export const useUploader = (name: keyof typeof appConfig.storage) =>
-  useInstance(UploaderService, name)
+export const useUploader = () =>
+  new UploadService()
