@@ -24,5 +24,6 @@
     "navigationBarTextStyle": "@navTxtStyle",
     "navigationStyle": "custom"
   },
-  "subPackages": []
+  "subPackages": [],
+  "__esModule": true
 }

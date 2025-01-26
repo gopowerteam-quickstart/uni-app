@@ -9,6 +9,7 @@
   "reject": [
     "vue",
     "vite",
+    "sass",
     "@types/node",
     "@dcloudio/uni-*",
     "@dcloudio/vite-*"
